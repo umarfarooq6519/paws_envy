@@ -18,9 +18,9 @@ class WelcomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Lottie.asset(
-              'assets/animations/pet_family.json',
-              height: 250,
-              width: 250,
+              'assets/animations/paws.json',
+              height: 150,
+              width: 150,
               repeat: false,
             ),
 
@@ -35,23 +35,6 @@ class WelcomePage extends StatelessWidget {
               style: TextStyles.largeText,
               textAlign: TextAlign.center,
             ),
-
-            // const SizedBox(height: 30),
-
-            // const TextField(
-            //   decoration: InputDecoration(
-            //     labelText: 'Username',
-            //   ),
-            // ),
-
-            // const SizedBox(height: 10),
-
-            // const TextField(
-            //   obscureText: true,
-            //   decoration: InputDecoration(
-            //     labelText: 'Password',
-            //   ),
-            // ),
 
             const SizedBox(height: 40),
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:paws_envy/screens/auth.page.dart';
-import 'package:paws_envy/screens/home.page.dart';
 import 'package:paws_envy/screens/welcome.page.dart';
 
 void main() {

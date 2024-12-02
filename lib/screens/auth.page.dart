@@ -1,28 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:lottie/lottie.dart';
+
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
 import 'package:paws_envy/widgets/secondary_btn.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
+
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentPage = _pageController.page?.round() ?? 0;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.purple[50],
       body: Column(
         children: [
           // custom image using expanded
-          const Expanded(
+          Expanded(
             flex: 1,
-            child: Center(child: Text('Custom Image')),
+            child: Container(
+              child: Lottie.asset(
+                'assets/animations/pet_family.json',
+                height: 400,
+                width: 400,
+                repeat: false,
+              ),
+            ),
           ),
 
           Expanded(
+            flex: 1,
             child: Container(
-              decoration: BoxDecoration(
-                color: Colors.purple[50],
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
                   topRight: Radius.circular(50),
                 ),
@@ -33,9 +61,11 @@ class AuthPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 20),
                       SizedBox(
-                        height: 250,
+                        height: 180,
                         child: PageView(
+                          controller: _pageController,
                           children: const [
                             FeatureCard(
                               title: 'Shared Pet Profiles',
@@ -50,11 +80,29 @@ class AuthPage extends StatelessWidget {
                             FeatureCard(
                               title: 'Chatbot for Assistance',
                               description:
-                                  'Access instant, AI-powered assistance for pet care queries and support. Get reliable answers at any time.',
+                                  'Instant access, AI-powered assistance for pet care queries and support. Get reliable answers at any time.',
                             ),
                           ],
                         ),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          3,
+                          (index) => Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 6),
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentPage == index
+                                  ? Colors.black87
+                                  : Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
                       PrimaryBtn(
                         onPressed: () {
                           Navigator.pushNamed(context, '/signup');
