@@ -32,7 +32,6 @@ class _AuthPageState extends State<AuthPage> {
       backgroundColor: Colors.purple[50],
       body: Column(
         children: [
-          // custom image using expanded
           Expanded(
             flex: 1,
             child: Container(
@@ -44,7 +43,6 @@ class _AuthPageState extends State<AuthPage> {
               ),
             ),
           ),
-
           Expanded(
             flex: 1,
             child: Container(
@@ -66,23 +64,7 @@ class _AuthPageState extends State<AuthPage> {
                         height: 180,
                         child: PageView(
                           controller: _pageController,
-                          children: const [
-                            FeatureCard(
-                              title: 'Shared Pet Profiles',
-                              description:
-                                  'Share and manage pet details with family members. Coordinate care routines and updates seamlessly.',
-                            ),
-                            FeatureCard(
-                              title: 'AI-Powered Pet Care',
-                              description:
-                                  'Get personalized pet care suggestions tailored to your needs. From health advice to activity suggestions.',
-                            ),
-                            FeatureCard(
-                              title: 'Chatbot for Assistance',
-                              description:
-                                  'Instant access, AI-powered assistance for pet care queries and support. Get reliable answers at any time.',
-                            ),
-                          ],
+                          children: featureCards,
                         ),
                       ),
                       Row(
@@ -104,15 +86,13 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                       const SizedBox(height: 40),
                       PrimaryBtn(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/signup');
-                        },
+                        onPressed: () {},
                         text: 'Sign Up',
                       ),
                       const SizedBox(height: 15),
                       SecondaryBtn(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/login');
+                          Navigator.pushNamed(context, '/auth/login');
                         },
                         text: 'Log In',
                       ),
@@ -158,3 +138,21 @@ class FeatureCard extends StatelessWidget {
     );
   }
 }
+
+final List<FeatureCard> featureCards = [
+  const FeatureCard(
+    title: 'Shared Pet Profiles',
+    description:
+        'Share and manage pet details with family members. Coordinate care routines and updates seamlessly.',
+  ),
+  const FeatureCard(
+    title: 'AI-Powered Pet Care',
+    description:
+        'Get personalized pet care suggestions tailored to your needs. From health advice to activity suggestions.',
+  ),
+  const FeatureCard(
+    title: 'Chatbot for Assistance',
+    description:
+        'Instant access, AI-powered assistance for pet care queries and support. Get reliable answers at any time.',
+  ),
+];
