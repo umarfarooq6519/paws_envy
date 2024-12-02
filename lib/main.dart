@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/screens/welcome_page.dart';
+import 'package:paws_envy/screens/auth.page.dart';
+import 'package:paws_envy/screens/home.page.dart';
+import 'package:paws_envy/screens/welcome.page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const WelcomePage(),
-        // '/auth': (context) => const AuthPage(),
+        '/auth': (context) => const AuthPage(),
       },
     );
   }

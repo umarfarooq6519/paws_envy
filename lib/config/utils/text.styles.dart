@@ -13,6 +13,12 @@ class TextStyles {
     fontSize: 18,
   );
 
+  static const mediumHeading = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+  );
+
   static const mainHeading = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w700,
@@ -24,6 +30,6 @@ class TextStyles {
 
     fontSize: 18,
     fontWeight: FontWeight.w400,
-    color: Colors.white,
+    // color: Colors.white,
   );
 }
