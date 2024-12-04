@@ -32,10 +32,10 @@ class SecondaryBtn extends StatelessWidget {
               text,
               style: TextStyles.btnText,
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 6),
             const Icon(
-              Icons.arrow_forward,
-              size: 20,
+              Icons.arrow_forward_ios,
+              size: 14,
               color: Colors.black87,
             ),
           ],

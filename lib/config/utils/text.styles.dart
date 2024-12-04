@@ -1,22 +1,46 @@
 import 'package:flutter/material.dart';
 
 class TextStyles {
+  static const smallText = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+  );
+
   static const baseText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 16,
   );
 
-  static const largeText = TextStyle(
+  static const mediumText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 18,
+  );
+
+  static const largeText = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    fontSize: 22,
   );
 
   static const mediumHeading = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 24,
     fontWeight: FontWeight.w600,
+  );
+
+  static const largeHeading = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const xLargeHeading = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w700,
+    fontSize: 32,
   );
 
   static const mainHeading = TextStyle(
@@ -28,7 +52,7 @@ class TextStyles {
   static const btnText = TextStyle(
     fontFamily: 'Poppins',
 
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: FontWeight.w400,
     // color: Colors.white,
   );

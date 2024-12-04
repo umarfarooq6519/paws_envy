@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class PrimaryBtn extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-
-  const PrimaryBtn({
-    super.key,
-    required this.onPressed,
-    required this.text,
-  });
+class GoogleBtn extends StatelessWidget {
+  const GoogleBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +11,12 @@ class PrimaryBtn extends StatelessWidget {
       width: double.infinity,
       height: 55,
       child: FilledButton.tonal(
-        onPressed: onPressed,
-        style: const ButtonStyle(
-          side: WidgetStatePropertyAll(
+        onPressed: () {},
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(
+            Colors.transparent,
+          ),
+          side: const WidgetStatePropertyAll(
             BorderSide(color: Colors.black87, width: 1),
           ),
         ),
@@ -27,16 +24,18 @@ class PrimaryBtn extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              text,
+            // google image
+            SvgPicture.asset(
+              'assets/icons/google_icon.svg',
+              width: 35,
+              height: 35,
+            ),
+            const SizedBox(width: 8),
+            const Text(
+              'Continue with Google',
               style: TextStyles.btnText,
             ),
             const SizedBox(width: 6),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-              color: Colors.black87,
-            ),
           ],
         ),
       ),
