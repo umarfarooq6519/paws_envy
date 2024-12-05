@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 
 class TextStyles {
   static const smallText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 14,
+    color: AppColors.gray,
   );
 
   static const baseText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 16,
+    color: AppColors.gray,
   );
 
   static const mediumText = TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 
 import 'package:paws_envy/config/utils/constants.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
@@ -31,7 +32,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50],
+      backgroundColor: AppColors.purpleAccent,
       body: Column(
         children: [
           Column(
@@ -59,9 +60,10 @@ class _WelcomePageState extends State<WelcomePage> {
           Expanded(
             flex: 1,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                border: Border.all(color: AppColors.gray),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(50),
                   topRight: Radius.circular(50),
                 ),
@@ -90,8 +92,8 @@ class _WelcomePageState extends State<WelcomePage> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentPage == index
-                                ? Colors.black87
-                                : Colors.grey,
+                                ? AppColors.black
+                                : AppColors.lightGray,
                           ),
                         ),
                       ),
@@ -117,7 +119,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     const SizedBox(height: 25),
                     const CustomDivider(text: 'OR'),
                     const SizedBox(height: 25),
-                    const GoogleBtn()
+                    const GoogleBtn(),
                   ],
                 ),
               ),

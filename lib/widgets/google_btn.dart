@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,12 +13,12 @@ class GoogleBtn extends StatelessWidget {
       height: 55,
       child: FilledButton.tonal(
         onPressed: () {},
-        style: ButtonStyle(
+        style: const ButtonStyle(
           backgroundColor: WidgetStatePropertyAll(
             Colors.transparent,
           ),
-          side: const WidgetStatePropertyAll(
-            BorderSide(color: Colors.black87, width: 1),
+          side: WidgetStatePropertyAll(
+            BorderSide(color: AppColors.gray, width: 1),
           ),
         ),
         child: Row(

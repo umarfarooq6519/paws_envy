@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class CustomDivider extends StatelessWidget {
@@ -16,7 +17,7 @@ class CustomDivider extends StatelessWidget {
         const Expanded(
           child: Divider(
             thickness: 1,
-            color: Colors.grey,
+            color: AppColors.lightGray,
           ),
         ),
         Padding(
@@ -29,7 +30,7 @@ class CustomDivider extends StatelessWidget {
         const Expanded(
           child: Divider(
             thickness: 1,
-            color: Colors.grey,
+            color: AppColors.lightGray,
           ),
         ),
       ],

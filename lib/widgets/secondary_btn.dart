@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class SecondaryBtn extends StatelessWidget {
@@ -21,7 +22,7 @@ class SecondaryBtn extends StatelessWidget {
         style: const ButtonStyle(
           backgroundColor: WidgetStatePropertyAll(Colors.transparent),
           side: WidgetStatePropertyAll(
-            BorderSide(color: Colors.black87, width: 1),
+            BorderSide(color: AppColors.gray, width: 1),
           ),
         ),
         child: Row(
@@ -33,11 +34,7 @@ class SecondaryBtn extends StatelessWidget {
               style: TextStyles.btnText,
             ),
             const SizedBox(width: 6),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-              color: Colors.black87,
-            ),
+            const Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

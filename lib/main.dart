@@ -6,8 +6,8 @@ import 'package:paws_envy/screens/welcome.page.dart';
 
 // TODO:
 // ~ Complete Login + Signup UI
-// ~ Implement Auth Backend
 // ~ Complete Dashboard UI
+// ~ Implement Auth Backend
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,12 @@ class MyApp extends StatelessWidget {
       title: 'PawsEnvy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.purple,
+        ),
+        iconTheme: const IconThemeData(
+          size: 14,
+        ),
         useMaterial3: true,
       ),
       initialRoute: '/',
