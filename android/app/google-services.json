@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "692892755588",
+    "project_id": "pawsenvy-e1eec",
+    "storage_bucket": "pawsenvy-e1eec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692892755588:android:fa82080b618b5b545e44d1",
+        "android_client_info": {
+          "package_name": "com.example.paws_envy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692892755588-t6ioea729o574tq98s1ku24e0meu6hfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjgFYPxHTrp27meScZiP6Of3VAP30oG5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692892755588-t6ioea729o574tq98s1ku24e0meu6hfn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "692892755588-hvj97d74bhjtdis4krvkmv5h99pjc1p7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pawsEnvy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
