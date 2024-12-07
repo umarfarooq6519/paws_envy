@@ -114,8 +114,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       },
                       text: 'Continue',
                     ),
-
-                    // ##### google button #####
                     const SizedBox(height: 25),
                     const CustomDivider(text: 'OR'),
                     const SizedBox(height: 25),

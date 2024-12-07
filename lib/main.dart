@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:paws_envy/firebase_options.dart';
 
 import 'package:paws_envy/screens/login.page.dart';
 import 'package:paws_envy/screens/role.page.dart';
@@ -9,7 +11,12 @@ import 'package:paws_envy/screens/welcome.page.dart';
 // ~ Complete Dashboard UI
 // ~ Implement Auth Backend
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
