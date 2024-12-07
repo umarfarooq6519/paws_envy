@@ -20,7 +20,7 @@ allprojects {
     mavenCentral()  // Maven Central repository
   }
 }
-\
+
 
 rootProject.buildDir = "../build"
 subprojects {
