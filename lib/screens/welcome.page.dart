@@ -38,35 +38,17 @@ class _WelcomePageState extends State<WelcomePage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const SizedBox(height: 50),
-              Lottie.asset(
-                'assets/animations/paws.json',
-                height: 150,
-                width: 150,
-                repeat: false,
-              ),
-              const Text(
-                MyConstants.appName,
-                style: TextStyles.mainHeading,
-              ),
-              const Text(
-                MyConstants.appSlogan,
-                style: TextStyles.mediumText,
-                textAlign: TextAlign.center,
-              ),
+              // ##### header #####
+              _lottieAnimation(),
+              _appName(),
+              _appSlogan(),
               const SizedBox(height: 40),
             ],
           ),
           Expanded(
             flex: 1,
             child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                border: Border.all(color: AppColors.gray),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),
-                ),
-              ),
+              decoration: _containerDecoration(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
@@ -98,21 +80,9 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        hintText: 'Email',
-                      ),
-                    ),
+                    _emailField(),
                     const SizedBox(height: 15),
-                    PrimaryBtn(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/role');
-                      },
-                      text: 'Continue',
-                    ),
+                    _continueBtn(context),
                     const SizedBox(height: 25),
                     const CustomDivider(text: 'OR'),
                     const SizedBox(height: 25),
@@ -126,6 +96,59 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
+}
+
+Widget _appName() {
+  return const Text(
+    MyConstants.appName,
+    style: TextStyles.mainHeading,
+  );
+}
+
+Widget _appSlogan() {
+  return const Text(
+    MyConstants.appSlogan,
+    style: TextStyles.mediumText,
+    textAlign: TextAlign.center,
+  );
+}
+
+Widget _lottieAnimation() {
+  return Lottie.asset(
+    'assets/animations/paws.json',
+    height: 150,
+    width: 150,
+    repeat: false,
+  );
+}
+
+BoxDecoration _containerDecoration() {
+  return BoxDecoration(
+    color: AppColors.white,
+    border: Border.all(color: AppColors.gray),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(50),
+      topRight: Radius.circular(50),
+    ),
+  );
+}
+
+Widget _emailField() {
+  return TextField(
+    decoration: InputDecoration(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      hintText: 'Email',
+    ),
+  );
+}
+
+Widget _continueBtn(context) {
+  return PrimaryBtn(
+    onPressed: () {},
+    text: 'Continue',
+  );
 }
 
 class FeatureCard extends StatelessWidget {

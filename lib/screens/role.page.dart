@@ -34,44 +34,81 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(user?.email ?? 'Signed Out'),
-              const Text(
-                'Welcome, Umar',
-                style: TextStyles.xLargeHeading,
-              ),
-              const Text(
-                'Please define your role to continue',
-                style: TextStyles.mediumText,
-              ),
+              _heading(),
+              _subHeading(),
               const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
-                  children: [
-                    PrimaryBtn(onPressed: () {}, text: 'Pet Owner'),
-                    const SizedBox(height: 15),
-                    SecondaryBtn(onPressed: () {}, text: 'Veterinarian'),
-                  ],
+                  children: _roleSelectionBtns(),
                 ),
               ),
               const SizedBox(height: 15),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                child: Text(
-                  '*As a veterinarian, we would prompt you to provide your certification.',
-                  style: TextStyles.smallText,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              FloatingActionButton(
-                onPressed: () {
-                  handleSignOut(context);
-                },
-                child: const Icon(Icons.add),
-              ),
+              _vetWarningMsg(),
+              const SizedBox(height: 50),
+              _signoutBtn(handleSignOut, context),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Widget _heading() {
+  return const Text(
+    'Welcome, Umar',
+    style: TextStyles.xLargeHeading,
+  );
+}
+
+Widget _subHeading() {
+  return const Text(
+    'Please define your role to continue',
+    style: TextStyles.mediumText,
+  );
+}
+
+List<Widget> _roleSelectionBtns() {
+  return <Widget>[
+    PrimaryBtn(onPressed: () {}, text: 'Pet Owner'),
+    const SizedBox(height: 15),
+    SecondaryBtn(onPressed: () {}, text: 'Veterinarian'),
+  ];
+}
+
+Widget _vetWarningMsg() {
+  return const Padding(
+    padding: EdgeInsets.symmetric(horizontal: 50),
+    child: Text(
+      '*As a veterinarian, we would prompt you to provide your certification.',
+      style: TextStyles.smallText,
+      textAlign: TextAlign.center,
+    ),
+  );
+}
+
+Widget _signoutBtn(handleSignOut, context) {
+  return OutlinedButton(
+    onPressed: () {
+      handleSignOut(context);
+    },
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          Icons.logout,
+          size: 16,
+        ),
+        SizedBox(width: 8),
+        Text(
+          'Sign Out',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
+    ),
+  );
 }
