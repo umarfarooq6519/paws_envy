@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:paws_envy/config/firebase/auth.model.dart';
 import 'package:paws_envy/firebase_options.dart';
 
-import 'package:paws_envy/screens/login.page.dart';
 import 'package:paws_envy/screens/role.page.dart';
 import 'package:paws_envy/screens/welcome.page.dart';
+import 'package:paws_envy/widget.tree.dart';
 
 // TODO:
 // ~ Complete Login + Signup UI
@@ -17,7 +19,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider<AuthModel>(
+      create: (context) => AuthModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,10 +44,9 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      home: const WidgetTree(),
       routes: {
-        '/': (context) => const WelcomePage(),
-        '/login': (context) => const LoginPage(),
+        '/welcome': (context) => const WelcomePage(),
         '/role': (context) => const RoleSelectionPage(),
       },
     );

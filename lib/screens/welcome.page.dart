@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:paws_envy/config/utils/colors.dart';
 
+import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/constants.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/custom_divider.dart';
@@ -32,7 +32,6 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.purpleAccent,
       body: Column(
         children: [
           Column(

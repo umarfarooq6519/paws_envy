@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/firebase/auth.model.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:paws_envy/config/firebase/auth.service.dart';
 
 class GoogleBtn extends StatelessWidget {
   const GoogleBtn({super.key});
@@ -16,8 +16,8 @@ class GoogleBtn extends StatelessWidget {
       child: FilledButton.tonal(
         onPressed: () async {
           try {
-            await AuthService().signInWithGoogle();
-            Navigator.pushNamed(context, '/role');
+            await AuthModel().signInWithGoogle();
+            // Navigator.pushNamed(context, '/role');
           } catch (e) {
             // Handle errors, e.g., display an error message to the user
             print("Error signing in with Google: $e");
