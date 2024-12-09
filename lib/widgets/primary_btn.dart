@@ -19,25 +19,33 @@ class PrimaryBtn extends StatelessWidget {
       height: 55,
       child: FilledButton.tonal(
         onPressed: onPressed,
-        style: const ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(AppColors.lightPurple),
-          side: WidgetStatePropertyAll(
-            BorderSide(color: AppColors.gray, width: 1),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style: TextStyles.btnText,
-            ),
-            const SizedBox(width: 6),
-            const Icon(Icons.arrow_forward_ios),
-          ],
-        ),
+        style: _btnStyling(),
+        child: _btnContainer(text),
       ),
     );
   }
+}
+
+ButtonStyle _btnStyling() {
+  return const ButtonStyle(
+    backgroundColor: WidgetStatePropertyAll(AppColors.lightPurple),
+    side: WidgetStatePropertyAll(
+      BorderSide(color: AppColors.gray, width: 1),
+    ),
+  );
+}
+
+Widget _btnContainer(text) {
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+        text,
+        style: TextStyles.btnText,
+      ),
+      const SizedBox(width: 6),
+      const Icon(Icons.arrow_forward_ios),
+    ],
+  );
 }

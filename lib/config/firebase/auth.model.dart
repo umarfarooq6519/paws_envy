@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -10,6 +11,8 @@ class AuthModel extends ChangeNotifier {
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
   Future<void> signInWithGoogle() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -24,9 +27,18 @@ class AuthModel extends ChangeNotifier {
         idToken: googleAuth?.idToken,
       );
 
-      // Once signed in, return the UserCredential
+      // Once signed in, save the UserCredential
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
+
+      final User? user = userCredential.user;
+      final AdditionalUserInfo? userInfo = userCredential.additionalUserInfo;
+
+      await prefs.setString('userId', user!.uid);
+      await prefs.setBool('existing', userInfo!.isNewUser);
+
+      print('User UID: ${user.uid}');
+      print('Existing User: ${userInfo.isNewUser}');
 
       // currentUser = userCredential.user;
       notifyListeners();

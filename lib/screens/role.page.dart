@@ -6,6 +6,7 @@ import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
 import 'package:paws_envy/widgets/secondary_btn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RoleSelectionPage extends StatefulWidget {
   const RoleSelectionPage({super.key});
@@ -16,6 +17,8 @@ class RoleSelectionPage extends StatefulWidget {
 
 class _RoleSelectionPageState extends State<RoleSelectionPage> {
   final User? user = AuthModel().currentUser;
+
+  get firstName => user?.displayName?.split(' ')[0];
 
   Future<void> handleSignOut(context) async {
     await AuthModel().signOut();
@@ -33,8 +36,7 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(user?.email ?? 'Signed Out'),
-              _heading(),
+              _heading(firstName),
               _subHeading(),
               const SizedBox(height: 30),
               Padding(
@@ -55,9 +57,9 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
   }
 }
 
-Widget _heading() {
-  return const Text(
-    'Welcome, Umar',
+Widget _heading(firstName) {
+  return Text(
+    'Welcome, $firstName',
     style: TextStyles.xLargeHeading,
   );
 }
