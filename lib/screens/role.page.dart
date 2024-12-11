@@ -6,7 +6,6 @@ import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
 import 'package:paws_envy/widgets/secondary_btn.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RoleSelectionPage extends StatefulWidget {
   const RoleSelectionPage({super.key});
@@ -42,11 +41,20 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
-                  children: _roleSelectionBtns(),
+                  children: [
+                    PrimaryBtn(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/dash');
+                      },
+                      text: 'Pet Owner',
+                    ),
+                    const SizedBox(height: 15),
+                    SecondaryBtn(onPressed: () {}, text: 'Veterinarian'),
+                    const SizedBox(height: 10),
+                    _vetWarningMsg(),
+                  ],
                 ),
               ),
-              const SizedBox(height: 15),
-              _vetWarningMsg(),
               const SizedBox(height: 50),
               _signoutBtn(handleSignOut, context),
             ],
@@ -71,22 +79,11 @@ Widget _subHeading() {
   );
 }
 
-List<Widget> _roleSelectionBtns() {
-  return <Widget>[
-    PrimaryBtn(onPressed: () {}, text: 'Pet Owner'),
-    const SizedBox(height: 15),
-    SecondaryBtn(onPressed: () {}, text: 'Veterinarian'),
-  ];
-}
-
 Widget _vetWarningMsg() {
-  return const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 50),
-    child: Text(
-      '*As a veterinarian, we would prompt you to provide your certification.',
-      style: TextStyles.smallText,
-      textAlign: TextAlign.center,
-    ),
+  return const Text(
+    '*As a veterinarian, we would prompt you to provide your certification.',
+    style: TextStyles.smallText,
+    textAlign: TextAlign.center,
   );
 }
 

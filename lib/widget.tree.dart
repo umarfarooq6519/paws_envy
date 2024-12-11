@@ -15,13 +15,14 @@ class _WidgetTreeState extends State<WidgetTree> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: AuthModel().authStateChanges,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const RoleSelectionPage();
-          } else {
-            return const WelcomePage();
-          }
-        });
+      stream: AuthModel().authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return const RoleSelectionPage();
+        } else {
+          return const WelcomePage();
+        }
+      },
+    );
   }
 }

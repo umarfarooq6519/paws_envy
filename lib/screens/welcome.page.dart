@@ -145,10 +145,7 @@ Widget _emailField() {
 }
 
 Widget _continueBtn(context) {
-  return PrimaryBtn(
-    onPressed: () {},
-    text: 'Continue',
-  );
+  return PrimaryBtn(onPressed: () {}, text: 'Continue');
 }
 
 class FeatureCard extends StatelessWidget {
