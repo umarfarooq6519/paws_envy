@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
@@ -45,7 +46,10 @@ Widget _btnContainer(text) {
         style: TextStyles.btnText,
       ),
       const SizedBox(width: 6),
-      const Icon(Icons.arrow_forward_ios),
+      const Icon(
+        LineIcons.alternateLongArrowRight,
+        size: 20,
+      ),
     ],
   );
 }

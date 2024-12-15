@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/firebase/auth.model.dart';
+import 'package:paws_envy/config/firebase/auth.config.dart';
 
 import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
@@ -21,7 +21,7 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
 
   Future<void> handleSignOut(context) async {
     await AuthModel().signOut();
-    // Navigator.pushNamed(context, '/');
+    print('User Signed Out');
   }
 
   @override
@@ -35,7 +35,7 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _heading(firstName),
+              _heading(),
               _subHeading(),
               const SizedBox(height: 30),
               Padding(
@@ -56,58 +56,58 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
                 ),
               ),
               const SizedBox(height: 50),
-              _signoutBtn(handleSignOut, context),
+              _signoutBtn(),
             ],
           ),
         ),
       ),
     );
   }
-}
 
-Widget _heading(firstName) {
-  return Text(
-    'Welcome, $firstName',
-    style: TextStyles.xLargeHeading,
-  );
-}
+  Widget _heading() {
+    return Text(
+      'Welcome, $firstName',
+      style: TextStyles.xLargeHeading,
+    );
+  }
 
-Widget _subHeading() {
-  return const Text(
-    'Please define your role to continue',
-    style: TextStyles.mediumText,
-  );
-}
+  Widget _subHeading() {
+    return const Text(
+      'Please define your role to continue',
+      style: TextStyles.mediumText,
+    );
+  }
 
-Widget _vetWarningMsg() {
-  return const Text(
-    '*As a veterinarian, we would prompt you to provide your certification.',
-    style: TextStyles.smallText,
-    textAlign: TextAlign.center,
-  );
-}
+  Widget _vetWarningMsg() {
+    return const Text(
+      '*As a veterinarian, we would prompt you to provide your certification.',
+      style: TextStyles.smallText,
+      textAlign: TextAlign.center,
+    );
+  }
 
-Widget _signoutBtn(handleSignOut, context) {
-  return OutlinedButton(
-    onPressed: () {
-      handleSignOut(context);
-    },
-    child: const Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          Icons.logout,
-          size: 16,
-        ),
-        SizedBox(width: 8),
-        Text(
-          'Sign Out',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+  Widget _signoutBtn() {
+    return OutlinedButton(
+      onPressed: () {
+        handleSignOut(context);
+      },
+      child: const Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.logout,
+            size: 16,
           ),
-        ),
-      ],
-    ),
-  );
+          SizedBox(width: 8),
+          Text(
+            'Sign Out',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

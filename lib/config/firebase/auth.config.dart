@@ -35,10 +35,10 @@ class AuthModel extends ChangeNotifier {
       final AdditionalUserInfo? userInfo = userCredential.additionalUserInfo;
 
       await prefs.setString('userId', user!.uid);
-      await prefs.setBool('existing', userInfo!.isNewUser);
+      await prefs.setBool('isNewUser', userInfo!.isNewUser);
 
-      print('User UID: ${user.uid}');
-      print('Existing User: ${userInfo.isNewUser}');
+      print(user.email);
+      print('isNewUser: ${userInfo.isNewUser}');
 
       // currentUser = userCredential.user;
       notifyListeners();

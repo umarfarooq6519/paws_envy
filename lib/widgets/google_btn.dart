@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/firebase/auth.model.dart';
+import 'package:paws_envy/config/firebase/auth.config.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paws_envy/config/utils/colors.dart';
@@ -38,8 +38,8 @@ class GoogleBtn extends StatelessWidget {
             // google image
             SvgPicture.asset(
               'assets/icons/google_icon.svg',
-              width: 35,
-              height: 35,
+              width: 33,
+              height: 33,
             ),
             const SizedBox(width: 8),
             const Text(

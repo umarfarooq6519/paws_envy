@@ -34,16 +34,19 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: Column(
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const SizedBox(height: 50),
-              // ##### header #####
-              _lottieAnimation(),
-              _appName(),
-              _appSlogan(),
-              const SizedBox(height: 40),
-            ],
+          Container(
+            color: AppColors.purpleAccent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(height: 50),
+                // ##### header #####
+                _lottieAnimation(),
+                _appName(),
+                _appSlogan(),
+                const SizedBox(height: 40),
+              ],
+            ),
           ),
           Expanded(
             flex: 1,

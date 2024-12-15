@@ -4,7 +4,7 @@ import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/screens/dash.page.dart';
 import 'package:provider/provider.dart';
 import 'package:paws_envy/firebase_options.dart';
-import 'package:paws_envy/config/firebase/auth.model.dart';
+import 'package:paws_envy/config/firebase/auth.config.dart';
 
 import 'package:paws_envy/screens/role.page.dart';
 import 'package:paws_envy/screens/welcome.page.dart';
@@ -38,19 +38,14 @@ class MyApp extends StatelessWidget {
       title: 'PawsEnvy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-        ),
         useMaterial3: true,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: AppColors.purpleAccent,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black38,
-          selectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.w500,
-          ),
-          showSelectedLabels: true,
+        iconTheme: const IconThemeData(size: 28, color: AppColors.black),
+        colorScheme: ColorScheme.fromSeed(
+          surface: AppColors.purpleAccent, // handles all surface bg colors
+          seedColor: AppColors.lightPurple,
+          onSurface: AppColors.black,
         ),
+        fontFamily: 'Poppins',
       ),
       home: const WidgetTree(),
       routes: {

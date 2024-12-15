@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
@@ -20,32 +21,35 @@ class PrimaryBtn extends StatelessWidget {
       child: FilledButton.tonal(
         onPressed: onPressed,
         style: _btnStyling(),
-        child: _btnContainer(text),
+        child: _btnContainer(),
       ),
     );
   }
-}
 
-ButtonStyle _btnStyling() {
-  return const ButtonStyle(
-    backgroundColor: WidgetStatePropertyAll(AppColors.lightPurple),
-    side: WidgetStatePropertyAll(
-      BorderSide(color: AppColors.gray, width: 1),
-    ),
-  );
-}
+  Widget _btnContainer() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          text,
+          style: TextStyles.btnText,
+        ),
+        const SizedBox(width: 6),
+        const Icon(
+          LineIcons.alternateLongArrowRight,
+          size: 20,
+        ),
+      ],
+    );
+  }
 
-Widget _btnContainer(text) {
-  return Row(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(
-        text,
-        style: TextStyles.btnText,
+  ButtonStyle _btnStyling() {
+    return const ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll(AppColors.lightPurple),
+      side: WidgetStatePropertyAll(
+        BorderSide(color: AppColors.gray, width: 1),
       ),
-      const SizedBox(width: 6),
-      const Icon(Icons.arrow_forward_ios),
-    ],
-  );
+    );
+  }
 }
