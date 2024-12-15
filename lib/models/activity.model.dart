@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 
 class Activity {
   final String title;
@@ -18,19 +19,19 @@ final List<Activity> activities = [
   Activity(
     title: 'Morning Walk',
     time: '9:45 AM',
-    icon: Icons.directions_walk,
-    imageUrl: 'assets/images/person_1.jpg', // Path to your image
+    icon: LineIcons.walking,
+    imageUrl: 'assets/images/dog_1.jpg', // Path to your image
   ),
   Activity(
     title: 'Vaccination Appointment',
     time: '10:45 AM',
-    icon: Icons.medical_services,
-    imageUrl: 'assets/images/person_2.jpg', // Path to your image
+    icon: LineIcons.medicalBriefcase,
+    imageUrl: 'assets/images/cat_1.jpg', // Path to your image
   ),
   Activity(
     title: 'Playtime',
     time: '11:45 AM',
-    icon: Icons.toys,
-    imageUrl: 'assets/images/person_3.jpg', // Path to your image
+    icon: LineIcons.play,
+    imageUrl: 'assets/images/cat_2.jpg', // Path to your image
   ),
 ];

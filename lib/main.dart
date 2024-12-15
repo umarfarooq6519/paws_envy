@@ -1,19 +1,22 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/utils/colors.dart';
-import 'package:paws_envy/screens/dash.page.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:paws_envy/firebase_options.dart';
+
+import 'package:paws_envy/widget.tree.dart';
+import 'package:paws_envy/screens/Dashboard/dash.page.dart';
+import 'package:paws_envy/screens/RoleSelection/role.page.dart';
+import 'package:paws_envy/screens/Welcome/welcome.page.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/firebase/auth.config.dart';
 
-import 'package:paws_envy/screens/role.page.dart';
-import 'package:paws_envy/screens/welcome.page.dart';
-import 'package:paws_envy/widget.tree.dart';
-
 // TODO
-// ~ Complete Login + Signup UI
-// ~ Complete Dashboard UI
-// ~ Implement Auth Backend
+// ~ Complete Login + Signup UI ✅
+// ~ Complete Dashboard UI ✅
+// ~ Implement Auth Backend ✅
+// ~ Implement Profile Page
+// ~ Implement Modular Color Scheme
+// ~ Push to GitHub
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

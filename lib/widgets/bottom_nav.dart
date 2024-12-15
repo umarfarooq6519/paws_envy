@@ -13,45 +13,57 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
-    return GNav(
-      // onTabChange: (int newIndex) {
-      //   setState(() {
-      //     _currentIndex = newIndex;
-      //   });
-      // },
-      haptic: true,
-      iconSize: 24,
-      rippleColor: AppColors.lightPurple.withOpacity(0.3), // Ripple effect
-      tabBackgroundColor: Colors.white24, // Active tab background color
-      tabBorderRadius: 22, // Rounded corners for the active tab
-      tabActiveBorder:
-          Border.all(color: AppColors.gray, width: 1), // Optional border
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-      gap: 6,
-      color: AppColors.white.withOpacity(0.7),
-      activeColor: AppColors.white,
-      tabs: const [
-        GButton(
-          icon: LineIcons.home,
-          text: 'Home',
+    return Container(
+      margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
+      decoration: BoxDecoration(
+        color: AppColors.black,
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: GNav(
+          // onTabChange: (int newIndex) {
+          //   setState(() {
+          //     _currentIndex = newIndex;
+          //   });
+          // },
+          haptic: true,
+          iconSize: 24,
+          rippleColor: Colors.white30,
+          tabBackgroundColor: Colors.white10,
+          tabBorderRadius: 22,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+          gap: 6,
+          color: AppColors.white.withOpacity(0.7),
+          activeColor: AppColors.white,
+          tabs: _navigationTabs, // Your tab list
         ),
-        GButton(
-          icon: LineIcons.users,
-          text: 'Community',
-        ),
-        GButton(
-          icon: LineIcons.retroCamera,
-          text: 'Camera',
-        ),
-        GButton(
-          icon: LineIcons.paw,
-          text: 'Pets',
-        ),
-        GButton(
-          icon: LineIcons.user,
-          text: 'Profile',
-        ),
-      ], // Your tab list
+      ),
     );
+  }
+
+  List<GButton> get _navigationTabs {
+    return const [
+      GButton(
+        icon: LineIcons.home,
+        text: 'Home',
+      ),
+      GButton(
+        icon: LineIcons.users,
+        text: 'Community',
+      ),
+      GButton(
+        icon: LineIcons.retroCamera,
+        text: 'Camera',
+      ),
+      GButton(
+        icon: LineIcons.paw,
+        text: 'Pets',
+      ),
+      GButton(
+        icon: LineIcons.user,
+        text: 'Profile',
+      ),
+    ];
   }
 }

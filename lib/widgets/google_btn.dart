@@ -44,7 +44,7 @@ class GoogleBtn extends StatelessWidget {
             const SizedBox(width: 8),
             const Text(
               'Continue with Google',
-              style: TextStyles.btnText,
+              style: AppText.btnText,
             ),
             const SizedBox(width: 6),
           ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:paws_envy/config/firebase/auth.config.dart';
-import 'package:paws_envy/screens/dash.page.dart';
+import 'package:paws_envy/screens/Dashboard/dash.page.dart';
 
-import 'package:paws_envy/screens/role.page.dart';
-import 'package:paws_envy/screens/welcome.page.dart';
+import 'package:paws_envy/screens/RoleSelection/role.page.dart';
+import 'package:paws_envy/screens/Welcome/welcome.page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WidgetTree extends StatefulWidget {

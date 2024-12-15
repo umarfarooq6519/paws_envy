@@ -67,21 +67,21 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
   Widget _heading() {
     return Text(
       'Welcome, $firstName',
-      style: TextStyles.xLargeHeading,
+      style: AppText.xLargeHeading,
     );
   }
 
   Widget _subHeading() {
     return const Text(
       'Please define your role to continue',
-      style: TextStyles.mediumText,
+      style: AppText.mediumText,
     );
   }
 
   Widget _vetWarningMsg() {
     return const Text(
       '*As a veterinarian, we would prompt you to provide your certification.',
-      style: TextStyles.smallText,
+      style: AppText.smallText,
       textAlign: TextAlign.center,
     );
   }

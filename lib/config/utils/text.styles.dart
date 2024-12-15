@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:paws_envy/config/utils/colors.dart';
 
-class TextStyles {
-  static const dimText = TextStyle(
+class AppText {
+  static final dimText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    color: AppColors.lightGray,
+    color: AppColors.black.withOpacity(0.5),
   );
 
   static const smallText = TextStyle(
@@ -37,14 +37,14 @@ class TextStyles {
 
   static const smallHeading = TextStyle(
     fontFamily: 'Poppins',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w600,
   );
 
   static const mediumHeading = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 24,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
   );
 
   static const largeHeading = TextStyle(

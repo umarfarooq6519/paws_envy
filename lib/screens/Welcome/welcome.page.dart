@@ -104,14 +104,14 @@ class _WelcomePageState extends State<WelcomePage> {
 Widget _appName() {
   return const Text(
     MyConstants.appName,
-    style: TextStyles.mainHeading,
+    style: AppText.mainHeading,
   );
 }
 
 Widget _appSlogan() {
   return const Text(
     MyConstants.appSlogan,
-    style: TextStyles.mediumText,
+    style: AppText.mediumText,
     textAlign: TextAlign.center,
   );
 }
@@ -168,13 +168,13 @@ class FeatureCard extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyles.mediumHeading,
+          style: AppText.mediumHeading,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           description,
-          style: TextStyles.baseText,
+          style: AppText.baseText,
           textAlign: TextAlign.center,
         ),
       ],

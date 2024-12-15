@@ -33,7 +33,7 @@ class PrimaryBtn extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyles.btnText,
+          style: AppText.btnText,
         ),
         const SizedBox(width: 6),
         const Icon(
