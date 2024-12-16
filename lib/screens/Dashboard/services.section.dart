@@ -27,14 +27,15 @@ class DashboardServicesSection extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         // ##### Services List  #####
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           height: 54,
           child: ListView.builder(
             itemCount: services.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Chip(
                   padding: const EdgeInsets.all(12),
                   label: Text(services[index].name),
@@ -43,7 +44,7 @@ class DashboardServicesSection extends StatelessWidget {
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: const BorderSide(color: AppColors.gray),
+                    side: BorderSide(color: AppColors.border),
                   ),
                   labelStyle: AppText.baseText,
                 ),

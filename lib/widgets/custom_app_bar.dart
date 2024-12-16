@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:paws_envy/config/firebase/auth.config.dart';
+import 'package:paws_envy/config/utils/colors.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -12,46 +14,77 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  void handleSignOut(BuildContext context) {
-    // Add your sign-out logic here
+  void handleSignOut() {
+    AuthModel().signOut();
+    print('User Signed Out');
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      iconTheme: const IconThemeData(size: 28),
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: IconButton(
-          onPressed: () {
-            // Add your drawer/menu logic here
-          },
-          icon: const Icon(LineIcons.bars),
-        ),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Row(
+    return Container(
+      decoration: const BoxDecoration(
+          color: AppColors.purpleAccent,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.lightPurple,
+              blurRadius: 7,
+              spreadRadius: 3,
+            ),
+          ]),
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // Leading Section: "Hello" and "Umar Farooq"
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () {
-                  // Add your notification logic here
-                },
-                icon: const Icon(LineIcons.bell),
+              Text(
+                'Hey,',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-              IconButton(
-                onPressed: () {
-                  handleSignOut(context);
-                },
-                icon: const CircleAvatar(
-                  foregroundImage: AssetImage('assets/images/person_3.jpg'),
+              Text(
+                'Umar Farooq',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-        ),
-      ],
+          // Actions Section: CircleAvatar and Notification Icon
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  LineIcons.bell,
+                  color: AppColors.black,
+                ),
+                onPressed: () {},
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: handleSignOut,
+                child: const CircleAvatar(
+                  radius: 26,
+                  backgroundImage: AssetImage('assets/images/person_3.jpg'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

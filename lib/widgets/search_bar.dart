@@ -14,12 +14,13 @@ class _SearchBarFieldState extends State<SearchBarField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 15),
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: AppColors.lightPurple,
-            blurRadius: 15,
+            blurRadius: 10,
+            spreadRadius: 1,
           ),
         ],
       ),

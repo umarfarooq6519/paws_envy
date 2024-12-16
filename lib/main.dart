@@ -14,9 +14,9 @@ import 'package:paws_envy/config/firebase/auth.config.dart';
 // ~ Complete Login + Signup UI ✅
 // ~ Complete Dashboard UI ✅
 // ~ Implement Auth Backend ✅
+// ~ Push to GitHub ✅
 // ~ Implement Profile Page
 // ~ Implement Modular Color Scheme
-// ~ Push to GitHub
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

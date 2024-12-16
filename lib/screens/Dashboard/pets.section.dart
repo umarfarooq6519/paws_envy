@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paws_envy/config/utils/colors.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/models/pets.model.dart';
+import 'package:paws_envy/widgets/purple_chip.dart';
 
 class DashboardPetsSection extends StatelessWidget {
   const DashboardPetsSection({super.key});
@@ -21,10 +22,10 @@ class DashboardPetsSection extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 10),
         // ##### Pet Section List #####
-        SizedBox(
-          height: 200,
+        Container(
+          height: 225,
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: pets.length,
@@ -32,31 +33,28 @@ class DashboardPetsSection extends StatelessWidget {
               final pet = pets[index];
               return Container(
                 width: 170,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(35),
-                  border: Border.all(color: AppColors.border),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: AppColors.lightPurple,
+                      blurRadius: 8,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
-                padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      foregroundImage: AssetImage(pet.imageUrl),
+                      backgroundImage: AssetImage(pet.imageUrl),
                       radius: 55,
                     ),
                     const SizedBox(height: 10),
-                    Chip(
-                      backgroundColor: AppColors.lightPurple,
-                      label: Text(pet.name, style: AppText.baseText),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color: AppColors.border),
-                      ),
-                    ),
+                    PurpleChip(text: pet.name),
                   ],
                 ),
               );

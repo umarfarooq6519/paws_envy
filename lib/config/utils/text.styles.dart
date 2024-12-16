@@ -50,7 +50,7 @@ class AppText {
   static const largeHeading = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 28,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
   );
 
   static const xLargeHeading = TextStyle(
