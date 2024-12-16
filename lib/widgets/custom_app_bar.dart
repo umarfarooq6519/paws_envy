@@ -10,7 +10,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(80);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -35,55 +35,57 @@ class _CustomAppBarState extends State<CustomAppBar> {
               spreadRadius: 3,
             ),
           ]),
-      padding: const EdgeInsets.all(15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          // Leading Section: "Hello" and "Umar Farooq"
-          const Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Hey,',
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+      padding: const EdgeInsets.all(14),
+      child: SafeArea(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // Leading Section: "Hello" and "Umar Farooq"
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hey,',
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-              Text(
-                'Umar Farooq',
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  'Umar Farooq',
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          // Actions Section: CircleAvatar and Notification Icon
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(
-                  LineIcons.bell,
-                  color: AppColors.black,
+              ],
+            ),
+            // Actions Section: CircleAvatar and Notification Icon
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    LineIcons.bell,
+                    color: AppColors.black,
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-              const SizedBox(width: 8),
-              GestureDetector(
-                onTap: handleSignOut,
-                child: const CircleAvatar(
-                  radius: 26,
-                  backgroundImage: AssetImage('assets/images/person_3.jpg'),
+                const SizedBox(width: 8),
+                GestureDetector(
+                  onTap: handleSignOut,
+                  child: const CircleAvatar(
+                    radius: 26,
+                    backgroundImage: AssetImage('assets/images/person_3.jpg'),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
