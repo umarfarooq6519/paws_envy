@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paws_envy/config/firebase/auth.config.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class GoogleBtn extends StatelessWidget {

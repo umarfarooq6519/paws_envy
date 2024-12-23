@@ -5,6 +5,6 @@ class AppColors {
   static const white = Color(0xffffffff);
   static const gray = Color(0xff495057);
   static const lightGray = Color(0xffadb5bd);
-  static const lightPurple = Color(0xffE5D9F2);
-  static const purpleAccent = Color(0xffFEF7FF);
+  static const primary = Color(0xffE5D9F2);
+  static const primaryAccent = Color(0xffF8F8FF);
 }

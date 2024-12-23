@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/constants.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/custom_divider.dart';
@@ -35,7 +35,7 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Column(
         children: [
           Container(
-            color: AppColors.purpleAccent,
+            color: AppColors.primaryAccent,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

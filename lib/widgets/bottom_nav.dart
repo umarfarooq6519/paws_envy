@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -21,7 +21,7 @@ class _BottomNavState extends State<BottomNav> {
       // },
       haptic: true,
       iconSize: 24,
-      rippleColor: AppColors.lightPurple.withOpacity(0.3), // Ripple effect
+      rippleColor: AppColors.primary.withOpacity(0.3), // Ripple effect
       tabBackgroundColor: Colors.white24, // Active tab background color
       tabBorderRadius: 22, // Rounded corners for the active tab
       tabActiveBorder:
