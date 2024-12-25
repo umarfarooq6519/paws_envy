@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:paws_envy/config/firebase/auth.config.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
-
 import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});
@@ -32,6 +32,7 @@ class _WidgetTreeState extends State<WidgetTree> {
     );
   }
 
+  // function to check if the user is new
   Future<bool> _checkIfNewUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isNewUser = prefs.getBool('isNewUser') ?? false;

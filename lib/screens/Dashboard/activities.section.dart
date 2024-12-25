@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/models/activity.model.dart';
@@ -60,64 +61,52 @@ class DashboardActivitiesSectionState
 
   // ###########################
 
-  Row _sectionHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          'Recent Activity',
-          style: TextStyles.mediumHeading,
+  Row _sectionHeader() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Recent Activity',
+            style: TextStyles.mediumHeading,
+          ),
+          Text(
+            'View All',
+            style: TextStyles.smallText,
+          )
+        ],
+      );
+
+  BoxDecoration _cardDecoration() => BoxDecoration(
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.primary,
+            blurRadius: 10,
+            spreadRadius: 0,
+          )
+        ],
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(28),
+      );
+
+  Text _activityCardTitle(Activity activity) => Text(
+        activity.title,
+        style: TextStyles.baseText.copyWith(
+          fontWeight: FontWeight.bold,
         ),
-        Text(
-          'View All',
-          style: TextStyles.smallText,
-        )
-      ],
-    );
-  }
+      );
 
-  BoxDecoration _cardDecoration() {
-    return BoxDecoration(
-      boxShadow: const [
-        BoxShadow(
-          color: AppColors.primary,
-          blurRadius: 10,
-          spreadRadius: 0,
-        )
-      ],
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(40),
-    );
-  }
+  Text _activityCardDescription(Activity activity) => Text(
+        activity.time,
+        style: TextStyles.dimText,
+      );
 
-  Text _activityCardTitle(Activity activity) {
-    return Text(
-      activity.title,
-      style: TextStyles.baseText.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
+  Icon _iconLeft(Activity activity) => Icon(
+        activity.icon,
+        size: 30,
+        color: AppColors.black,
+      );
 
-  Text _activityCardDescription(Activity activity) {
-    return Text(
-      activity.time,
-      style: TextStyles.dimText,
-    );
-  }
-
-  Icon _iconLeft(Activity activity) {
-    return Icon(
-      activity.icon,
-      size: 30,
-      color: AppColors.black,
-    );
-  }
-
-  CircleAvatar _avatarRight(Activity activity) {
-    return CircleAvatar(
-      radius: 25,
-      backgroundImage: AssetImage(activity.imageUrl),
-    );
-  }
+  CircleAvatar _avatarRight(Activity activity) => CircleAvatar(
+        radius: 25,
+        backgroundImage: AssetImage(activity.imageUrl),
+      );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/shadow.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
@@ -62,24 +63,20 @@ class _DashboardServicesSectionState extends State<DashboardServicesSection> {
     );
   }
 
-  List<Widget> _sectionHeader() {
-    return [
-      const Text(
-        'Pet Services',
-        style: TextStyles.mediumHeading,
-      ),
-      Text(
-        'View All',
-        style: TextStyles.smallText,
-      )
-    ];
-  }
+  List<Widget> _sectionHeader() => [
+        const Text(
+          'Pet Services',
+          style: TextStyles.mediumHeading,
+        ),
+        Text(
+          'View All',
+          style: TextStyles.smallText,
+        )
+      ];
 
-  BoxDecoration _cardDecoration() {
-    return BoxDecoration(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: const [ShadowStyles.smallShadow],
-    );
-  }
+  BoxDecoration _cardDecoration() => BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [ShadowStyles.smallShadow],
+      );
 }

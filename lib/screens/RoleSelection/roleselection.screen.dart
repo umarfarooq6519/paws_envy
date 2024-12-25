@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/firebase/auth.config.dart';
 
+import 'package:paws_envy/config/firebase/auth.config.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';

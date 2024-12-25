@@ -43,7 +43,7 @@ Widget _btnContainer(text) {
     children: [
       Text(
         text,
-        style: AppText.btnText,
+        style: TextStyles.btnText,
       ),
       const SizedBox(width: 6),
       const Icon(

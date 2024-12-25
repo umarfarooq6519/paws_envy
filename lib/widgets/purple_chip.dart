@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class PurpleChip extends StatelessWidget {
@@ -13,10 +13,10 @@ class PurpleChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      backgroundColor: AppColors.lightPurple,
+      backgroundColor: AppColors.primaryAccent,
       label: Text(
         text,
-        style: AppText.baseText,
+        style: TextStyles.baseText,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       shape: RoundedRectangleBorder(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/firebase/auth.config.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Dashboard/activities.section.dart';
 import 'package:paws_envy/screens/Dashboard/pets.section.dart';
@@ -36,13 +35,13 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(0),
+        margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
         decoration: BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadius.circular(30),
         ),
         child: const Padding(
-          padding: EdgeInsets.all(14),
+          padding: EdgeInsets.all(12),
           child: BottomNav(),
         ),
       ),

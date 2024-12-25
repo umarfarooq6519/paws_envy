@@ -34,7 +34,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        iconTheme: const IconThemeData(size: 28, color: AppColors.black),
+        iconTheme: const IconThemeData(
+          size: 28,
+          color: AppColors.black,
+        ),
         colorScheme: ColorScheme.fromSeed(
           surface: AppColors.purpleAccent,
           seedColor: AppColors.primary,
