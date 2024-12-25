@@ -1,74 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 
-class AppText {
+class TextStyles {
   static final dimText = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    color: AppColors.black.withOpacity(0.5),
+    color: AppColors.black.withOpacity(0.7),
   );
 
-  static const smallText = TextStyle(
-    fontFamily: 'Poppins',
+  static final smallText = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    color: AppColors.gray,
+    color: AppColors.black.withOpacity(0.9),
   );
 
-  static const baseText = TextStyle(
-    fontFamily: 'Poppins',
+  static final baseText = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 16,
-    color: AppColors.gray,
+    color: AppColors.black.withOpacity(0.9),
   );
 
   static const mediumText = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 18,
   );
 
   static const largeText = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 22,
   );
 
-  static const smallHeading = TextStyle(
-    fontFamily: 'Poppins',
+  static const baseHeading = TextStyle(
     fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const smallHeading = TextStyle(
+    fontSize: 18,
     fontWeight: FontWeight.w600,
   );
 
+  static const normalHeading = TextStyle(
+    fontSize: 19,
+    fontWeight: FontWeight.w700,
+  );
+
   static const mediumHeading = TextStyle(
-    fontFamily: 'Poppins',
     fontSize: 24,
     fontWeight: FontWeight.w700,
   );
 
   static const largeHeading = TextStyle(
-    fontFamily: 'Poppins',
     fontSize: 28,
     fontWeight: FontWeight.w700,
   );
 
   static const xLargeHeading = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w700,
     fontSize: 32,
   );
 
   static const mainHeading = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w700,
     fontSize: 40,
   );
 
   static const btnText = TextStyle(
-    fontFamily: 'Poppins',
     fontSize: 17,
     fontWeight: FontWeight.w400,
-    // color: Colors.white,
   );
 }

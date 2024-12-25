@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/constants.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/custom_divider.dart';
@@ -104,14 +104,14 @@ class _WelcomePageState extends State<WelcomePage> {
 Widget _appName() {
   return const Text(
     MyConstants.appName,
-    style: AppText.mainHeading,
+    style: TextStyles.mainHeading,
   );
 }
 
 Widget _appSlogan() {
   return const Text(
     MyConstants.appSlogan,
-    style: AppText.mediumText,
+    style: TextStyles.mediumText,
     textAlign: TextAlign.center,
   );
 }
@@ -168,13 +168,13 @@ class FeatureCard extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppText.mediumHeading,
+          style: TextStyles.mediumHeading,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           description,
-          style: AppText.baseText,
+          style: TextStyles.baseText,
           textAlign: TextAlign.center,
         ),
       ],

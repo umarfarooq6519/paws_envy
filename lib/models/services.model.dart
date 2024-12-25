@@ -3,7 +3,7 @@ import 'package:line_icons/line_icons.dart';
 
 class Services {
   final String name;
-  final Icon icon;
+  final IconData icon;
 
   Services({
     required this.name,
@@ -14,14 +14,14 @@ class Services {
 List<Services> services = [
   Services(
     name: 'Medication',
-    icon: const Icon(LineIcons.pills),
+    icon: LineIcons.pills,
   ),
   Services(
     name: 'Vaccination',
-    icon: const Icon(LineIcons.syringe),
+    icon: LineIcons.syringe,
   ),
   Services(
     name: 'Pet Walking',
-    icon: const Icon(LineIcons.walking),
+    icon: LineIcons.walking,
   ),
 ];

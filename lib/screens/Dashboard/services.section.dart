@@ -1,58 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
+import 'package:paws_envy/config/utils/shadow.styles.dart';
+import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/models/services.model.dart';
 
-import 'package:paws_envy/config/utils/colors.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
-
-class DashboardServicesSection extends StatelessWidget {
+class DashboardServicesSection extends StatefulWidget {
   const DashboardServicesSection({super.key});
 
   @override
+  State<DashboardServicesSection> createState() =>
+      _DashboardServicesSectionState();
+}
+
+class _DashboardServicesSectionState extends State<DashboardServicesSection> {
+  @override
+  // ##### Pet Services Section #####
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ##### Services Header #####
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+        // ~ header
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Pet Services',
-                style: AppText.mediumHeading,
-              ),
-              Text('See All')
-            ],
+            children: _sectionHeader(),
           ),
         ),
-        const SizedBox(height: 8),
-        // ##### Services List  #####
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          height: 54,
+
+        const SizedBox(height: 6),
+
+        // ~ content
+        SizedBox(
+          height: 70,
           child: ListView.builder(
+            padding: const EdgeInsets.all(8),
             itemCount: services.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Chip(
-                  padding: const EdgeInsets.all(12),
-                  label: Text(services[index].name),
-                  avatar: services[index].icon,
-                  iconTheme: const IconThemeData(size: 24),
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: AppColors.border),
-                  ),
-                  labelStyle: AppText.baseText,
+              final service = services[index];
+              // card container
+              return Container(
+                width: 160,
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: _cardDecoration(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(service.icon),
+                    const SizedBox(width: 6),
+                    Text(
+                      service.name,
+                      style: TextStyles.baseHeading,
+                    ),
+                  ],
                 ),
               );
             },
           ),
         ),
       ],
+    );
+  }
+
+  List<Widget> _sectionHeader() {
+    return [
+      const Text(
+        'Pet Services',
+        style: TextStyles.mediumHeading,
+      ),
+      Text(
+        'View All',
+        style: TextStyles.smallText,
+      )
+    ];
+  }
+
+  BoxDecoration _cardDecoration() {
+    return BoxDecoration(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [ShadowStyles.smallShadow],
     );
   }
 }

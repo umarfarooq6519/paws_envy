@@ -14,12 +14,6 @@ class Pet {
 
 List<Pet> pets = [
   Pet(
-    name: 'Bruce',
-    imageUrl: 'assets/images/dog_1.jpg',
-    petType: 'Male',
-    age: '5yrs',
-  ),
-  Pet(
     name: 'Max',
     imageUrl: 'assets/images/dog_2.jpg',
     petType: 'Male',
@@ -28,7 +22,13 @@ List<Pet> pets = [
   Pet(
     name: 'Buddy',
     imageUrl: 'assets/images/cat_2.jpg',
-    petType: 'Female',
-    age: '6yrs',
+    petType: 'Persian Cat',
+    age: '5yrs',
+  ),
+  Pet(
+    name: 'Bruce',
+    imageUrl: 'assets/images/dog_1.jpg',
+    petType: 'Persian Cat',
+    age: '5yrs',
   ),
 ];

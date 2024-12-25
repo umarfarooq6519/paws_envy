@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class PrimaryBtn extends StatelessWidget {
@@ -46,7 +46,7 @@ class PrimaryBtn extends StatelessWidget {
 
   ButtonStyle _btnStyling() {
     return const ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll(AppColors.lightPurple),
+      backgroundColor: WidgetStatePropertyAll(AppColors.primary),
       side: WidgetStatePropertyAll(
         BorderSide(color: AppColors.gray, width: 1),
       ),

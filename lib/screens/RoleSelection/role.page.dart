@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:paws_envy/config/firebase/auth.config.dart';
 
-import 'package:paws_envy/config/utils/colors.dart';
+import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
 import 'package:paws_envy/widgets/secondary_btn.dart';
@@ -67,21 +67,21 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
   Widget _heading() {
     return Text(
       'Welcome, $firstName',
-      style: AppText.xLargeHeading,
+      style: TextStyles.xLargeHeading,
     );
   }
 
   Widget _subHeading() {
     return const Text(
       'Please define your role to continue',
-      style: AppText.mediumText,
+      style: TextStyles.mediumText,
     );
   }
 
   Widget _vetWarningMsg() {
-    return const Text(
+    return Text(
       '*As a veterinarian, we would prompt you to provide your certification.',
-      style: AppText.smallText,
+      style: TextStyles.smallText,
       textAlign: TextAlign.center,
     );
   }
