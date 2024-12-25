@@ -16,15 +16,15 @@ class RoleSelectionPage extends StatefulWidget {
 
 class _RoleSelectionPageState extends State<RoleSelectionPage> {
   final User? user = AuthModel().currentUser;
-
   get firstName => user?.displayName?.split(' ')[0];
 
-  Future<void> handleSignOut(context) async {
+  Future<void> handleSignOut() async {
     await AuthModel().signOut();
     print('User Signed Out');
   }
 
   @override
+  // ##### Role Selection Screen #####
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -35,27 +35,39 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _heading(),
-              _subHeading(),
+              // ~ header
+              Text(
+                'Welcome, $firstName',
+                style: TextStyles.xLargeHeading,
+              ),
+              const Text(
+                'Please define your role to continue',
+                style: TextStyles.mediumText,
+              ),
+
               const SizedBox(height: 30),
+
+              // ~ content
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
-                    PrimaryBtn(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/dash');
-                      },
-                      text: 'Pet Owner',
-                    ),
+                    _petOwnerButton(),
                     const SizedBox(height: 15),
-                    SecondaryBtn(onPressed: () {}, text: 'Veterinarian'),
+                    _vetButton(),
                     const SizedBox(height: 10),
-                    _vetWarningMsg(),
+                    Text(
+                      '*As a veterinarian, we would prompt you to provide your certification.',
+                      style: TextStyles.smallText,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
+
               const SizedBox(height: 50),
+
+              // ~ footer
               _signoutBtn(),
             ],
           ),
@@ -64,50 +76,36 @@ class _RoleSelectionPageState extends State<RoleSelectionPage> {
     );
   }
 
-  Widget _heading() {
-    return Text(
-      'Welcome, $firstName',
-      style: TextStyles.xLargeHeading,
-    );
-  }
+  SecondaryBtn _vetButton() =>
+      SecondaryBtn(onPressed: () {}, text: 'Veterinarian');
 
-  Widget _subHeading() {
-    return const Text(
-      'Please define your role to continue',
-      style: TextStyles.mediumText,
-    );
-  }
+  PrimaryBtn _petOwnerButton() => PrimaryBtn(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/dash');
+        },
+        text: 'Pet Owner',
+      );
 
-  Widget _vetWarningMsg() {
-    return Text(
-      '*As a veterinarian, we would prompt you to provide your certification.',
-      style: TextStyles.smallText,
-      textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _signoutBtn() {
-    return OutlinedButton(
-      onPressed: () {
-        handleSignOut(context);
-      },
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.logout,
-            size: 16,
-          ),
-          SizedBox(width: 8),
-          Text(
-            'Sign Out',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
+  Widget _signoutBtn() => OutlinedButton(
+        onPressed: () {
+          handleSignOut();
+        },
+        child: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.logout,
+              size: 16,
             ),
-          ),
-        ],
-      ),
-    );
-  }
+            SizedBox(width: 8),
+            Text(
+              'Sign Out',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      );
 }

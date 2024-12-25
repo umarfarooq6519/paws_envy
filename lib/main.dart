@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         iconTheme: const IconThemeData(size: 28, color: AppColors.black),
         colorScheme: ColorScheme.fromSeed(
-          surface: AppColors.primaryAccent,
+          surface: AppColors.purpleAccent,
           seedColor: AppColors.primary,
           onSurface: AppColors.black,
         ),
