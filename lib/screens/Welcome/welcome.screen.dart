@@ -9,14 +9,14 @@ import 'package:paws_envy/widgets/custom_divider.dart';
 import 'package:paws_envy/widgets/google_btn.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
 
   @override
-  State<WelcomePage> createState() => _WelcomePageState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   final PageController _slideController = PageController();
   int _currentPage = 0;
 

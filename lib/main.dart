@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           color: AppColors.black,
         ),
         colorScheme: ColorScheme.fromSeed(
-          surface: AppColors.purpleAccent,
+          surface: AppColors.secondaryAccent,
           seedColor: AppColors.primary,
           onSurface: AppColors.black,
         ),
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       // widget tree checks for user authentication
       home: const WidgetTree(),
       routes: {
-        '/welcome': (context) => const WelcomePage(),
+        '/welcome': (context) => const WelcomeScreen(),
         '/role': (context) => const RoleSelectionPage(),
         '/dash': (context) => const Dashboard(),
       },

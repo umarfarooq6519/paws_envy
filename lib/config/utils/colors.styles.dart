@@ -8,7 +8,8 @@ class AppColors {
   static const lightGray = Color(0xffadb5bd);
   static const primary = Color(0xffE5D9F2);
   static const primaryAccent = Color(0xffFEF7FF);
-  static const purpleAccent = Color(0xffF8F8FF);
+  static const secondary = Color(0xffD1D1F1);
+  static const secondaryAccent = Color(0xffF8F8FF);
 
   // purple accent F8F8FF
   // pink accent FEF7FF

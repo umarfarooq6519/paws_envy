@@ -28,7 +28,7 @@ class _WelcomePageState extends State<WelcomePage> {
         children: [
           // ~ logo section
           Container(
-            color: AppColors.purpleAccent,
+            color: AppColors.secondaryAccent,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

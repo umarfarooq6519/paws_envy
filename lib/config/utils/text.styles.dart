@@ -40,11 +40,6 @@ class TextStyles {
     fontWeight: FontWeight.w600,
   );
 
-  static const normalHeading = TextStyle(
-    fontSize: 19,
-    fontWeight: FontWeight.w700,
-  );
-
   static const mediumHeading = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w700,
