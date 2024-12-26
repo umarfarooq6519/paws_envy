@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Dashboard/activities.section.dart';
 import 'package:paws_envy/screens/Dashboard/pets.section.dart';
 import 'package:paws_envy/screens/Dashboard/services.section.dart';
-import 'package:paws_envy/screens/screen.handler.dart';
-import 'package:paws_envy/widgets/custom_app_bar.dart';
 import 'package:paws_envy/widgets/search_bar.dart';
 
 class Dashboard extends StatefulWidget {

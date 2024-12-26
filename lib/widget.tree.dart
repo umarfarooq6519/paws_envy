@@ -3,7 +3,6 @@ import 'package:paws_envy/screens/screen.handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:paws_envy/config/firebase/auth.config.dart';
-import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
 import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
 
