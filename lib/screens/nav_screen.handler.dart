@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
@@ -9,14 +10,14 @@ import 'package:paws_envy/screens/Pets/pet.screen.dart';
 import 'package:paws_envy/screens/Profile/profile.screen.dart';
 import 'package:paws_envy/widgets/custom_app_bar.dart';
 
-class ScreenHandler extends StatefulWidget {
-  const ScreenHandler({super.key});
+class NavScreenHandler extends StatefulWidget {
+  const NavScreenHandler({super.key});
 
   @override
-  State<ScreenHandler> createState() => _ScreenHandlerState();
+  State<NavScreenHandler> createState() => _NavScreenHandlerState();
 }
 
-class _ScreenHandlerState extends State<ScreenHandler> {
+class _NavScreenHandlerState extends State<NavScreenHandler> {
   int _currentIndex = 0;
 
   // list of screens accessible from bottom nav
@@ -25,7 +26,7 @@ class _ScreenHandlerState extends State<ScreenHandler> {
     CommunityScreen(),
     CameraScreen(),
     PetScreen(),
-    ProfileScreen(),
+    // ProfileScreen(),
   ];
 
   @override
@@ -47,8 +48,18 @@ class _ScreenHandlerState extends State<ScreenHandler> {
         ),
         child: _bottomNav(),
       ),
+
+      floatingActionButton: _chatbotBtn(),
     );
   }
+
+  // ################################
+
+  FloatingActionButton _chatbotBtn() => FloatingActionButton(
+        backgroundColor: AppColors.primary,
+        onPressed: () {},
+        child: Icon(LineIcons.robot),
+      );
 
   GNav _bottomNav() => GNav(
         onTabChange: (int newIndex) {
@@ -87,9 +98,9 @@ class _ScreenHandlerState extends State<ScreenHandler> {
           icon: LineIcons.paw,
           text: 'Pets',
         ),
-        GButton(
-          icon: LineIcons.user,
-          text: 'Profile',
-        ),
+        // GButton(
+        //   icon: LineIcons.user,
+        //   text: 'Profile',
+        // ),
       ];
 }
