@@ -47,6 +47,8 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // get new keys
+
   static FirebaseOptions web = FirebaseOptions(
     apiKey: dotenv.env['FIREBASE_WEB_API_KEY'] ?? '',
     appId: dotenv.env['FIREBASE_WEB_APP_ID'] ?? '',

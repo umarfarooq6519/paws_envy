@@ -16,12 +16,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  // function to handle signout
-  Future<void> handleSignOut() async {
-    await AuthModel().signOut();
-    print('User Signed Out');
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,13 +37,16 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
-  BoxDecoration _appBarDecoration() => const BoxDecoration(
+  BoxDecoration _appBarDecoration() => BoxDecoration(
         color: AppColors.primaryAccent,
-        boxShadow: [ShadowStyles.mediumShadow],
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(25),
-          bottomRight: Radius.circular(25),
+        border: Border(
+          bottom: BorderSide(color: AppColors.black.withOpacity(1), width: 0.3),
         ),
+        // boxShadow: [ShadowStyles.mediumShadow],
+        // borderRadius: BorderRadius.only(
+        //   bottomLeft: Radius.circular(28),
+        //   bottomRight: Radius.circular(28),
+        // ),
       );
 
   Row _actionSection() => Row(
@@ -60,7 +57,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: () => handleSignOut(),
+            onTap: () {
+              Navigator.pushNamed(context, '/profile');
+            },
             child: const CircleAvatar(
               radius: 24,
               backgroundImage: AssetImage('assets/images/person_3.jpg'),

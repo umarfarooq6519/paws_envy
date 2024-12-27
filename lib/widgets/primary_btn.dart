@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
@@ -17,7 +16,7 @@ class PrimaryBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 55,
+      height: 50,
       child: FilledButton.tonal(
         onPressed: onPressed,
         style: _btnStyling(),
@@ -33,13 +32,12 @@ class PrimaryBtn extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyles.btnText,
+          style: TextStyles.baseText,
         ),
-        const SizedBox(width: 6),
-        const Icon(
-          LineIcons.alternateLongArrowRight,
-          size: 20,
-        ),
+        // const Icon(
+        //   LineIcons.alternateLongArrowRight,
+        //   size: 20,
+        // ),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:paws_envy/screens/Profile/profile.screen.dart';
 
 import 'package:paws_envy/widget.tree.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
           seedColor: AppColors.primary,
           onSurface: AppColors.black,
         ),
-        fontFamily: 'Poppins',
+        fontFamily: 'Montserrat',
       ),
       // loads widget tree on app launch
       home: const WidgetTree(),
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomeScreen(),
         '/role': (context) => const RoleSelectionPage(),
         '/dash': (context) => const Dashboard(),
+        '/profile': (context) => const ProfileScreen(),
       },
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/screens/screen.handler.dart';
+import 'package:paws_envy/screens/nav_screen.handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:paws_envy/config/firebase/auth.config.dart';
@@ -24,7 +24,7 @@ class _WidgetTreeState extends State<WidgetTree> {
           if (status == true) {
             return const RoleSelectionPage();
           }
-          return const ScreenHandler();
+          return const NavScreenHandler();
         } else {
           return const WelcomeScreen();
         }
