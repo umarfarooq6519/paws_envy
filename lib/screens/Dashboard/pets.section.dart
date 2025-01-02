@@ -33,25 +33,26 @@ class _DashboardPetsSectionState extends State<DashboardPetsSection> {
         SizedBox(
           height: 200,
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(8),
-              itemCount: pets.length,
-              itemBuilder: (context, index) {
-                final pet = pets[index];
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  width: 160,
-                  decoration: _cardDecoration(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _petAvatar(pet),
-                      const SizedBox(height: 5),
-                      _petLabel(pet),
-                    ],
-                  ),
-                );
-              }),
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.all(8),
+            itemCount: pets.length,
+            itemBuilder: (context, index) {
+              final pet = pets[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                width: 160,
+                decoration: _cardDecoration(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _petAvatar(pet),
+                    const SizedBox(height: 5),
+                    _petLabel(pet),
+                  ],
+                ),
+              );
+            },
+          ),
         )
       ],
     );

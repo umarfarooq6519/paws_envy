@@ -7,7 +7,7 @@ import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
 import 'package:paws_envy/screens/Pets/pet.screen.dart';
-import 'package:paws_envy/screens/Profile/profile.screen.dart';
+import 'package:paws_envy/screens/Services/services.screen.dart';
 import 'package:paws_envy/widgets/custom_app_bar.dart';
 
 class NavScreenHandler extends StatefulWidget {
@@ -25,8 +25,8 @@ class _NavScreenHandlerState extends State<NavScreenHandler> {
     Dashboard(),
     CommunityScreen(),
     CameraScreen(),
+    ServicesScreen(),
     PetScreen(),
-    // ProfileScreen(),
   ];
 
   @override
@@ -95,12 +95,12 @@ class _NavScreenHandlerState extends State<NavScreenHandler> {
           text: 'Camera',
         ),
         GButton(
-          icon: LineIcons.paw,
-          text: 'Pets',
+          icon: LineIcons.heartbeat,
+          text: 'Services',
         ),
-        // GButton(
-        //   icon: LineIcons.user,
-        //   text: 'Profile',
-        // ),
+        GButton(
+          icon: LineIcons.paw,
+          text: 'My Pets',
+        ),
       ];
 }

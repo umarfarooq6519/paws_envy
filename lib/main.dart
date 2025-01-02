@@ -13,20 +13,23 @@ import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
 
 Future<void> main() async {
-  await dotenv.load(); // ensure all env variables are loaded
-
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load();
+
   // ensures the firebase options are loaded
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    ChangeNotifierProvider<AuthModel>(
-      create: (context) => AuthModel(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => AuthModel(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Montserrat',
       ),
-      // loads widget tree on app launch
+      // widget tree is the primary location of the app
       home: const WidgetTree(),
       routes: {
         '/welcome': (context) => const WelcomeScreen(),
