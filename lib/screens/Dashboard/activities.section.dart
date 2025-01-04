@@ -25,35 +25,40 @@ class DashboardActivitiesSectionState
           child: _sectionHeader(),
         ),
 
+        SizedBox(height: 5),
+
         // ~ content
         Column(
-          children: activities.map((activity) {
-            return Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-              decoration: _cardDecoration(),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Icon on the left
-                  _iconLeft(activity),
-                  const SizedBox(width: 14),
-                  // Activity title and description
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _activityCardTitle(activity),
-                        const SizedBox(height: 4),
-                        _activityCardDescription(activity),
-                      ],
+          children: activities.map(
+            (activity) {
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: _cardDecoration(),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Icon on the left
+                    _iconLeft(activity),
+                    const SizedBox(width: 14),
+                    // Activity title and description
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _activityCardTitle(activity),
+                          const SizedBox(height: 4),
+                          _activityCardDescription(activity),
+                        ],
+                      ),
                     ),
-                  ),
-                  _avatarRight(activity)
-                ],
-              ),
-            );
-          }).toList(),
+                    _avatarRight(activity)
+                  ],
+                ),
+              );
+            },
+          ).toList(),
         ),
       ],
     );

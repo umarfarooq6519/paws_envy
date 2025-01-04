@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
         DashboardPetsSection(),
         SizedBox(height: 30),
         DashboardServicesSection(),
-        SizedBox(height: 30),
+        SizedBox(height: 25),
         DashboardActivitiesSection(),
       ],
     );

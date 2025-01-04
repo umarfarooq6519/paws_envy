@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:line_icons/line_icons.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
+import 'package:paws_envy/config/utils/shadow.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/models/petcare.model.dart';
+import 'package:paws_envy/screens/Services/services_grid.section.dart';
 
 class ServicesScreen extends StatefulWidget {
   const ServicesScreen({super.key});
@@ -17,52 +21,16 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Center(
       child: ListView(
         children: [
+          // ~ Header
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-            child: Column(
-              children: [
-                Text(
-                  'Services',
-                  style: TextStyles.largeHeading
-                      .copyWith(fontWeight: FontWeight.w800),
-                ),
-                Text(
-                  'Care, Love, and Tail-Wagging Happiness!',
-                  style: TextStyles.baseText,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+            child: _servicesHeader(),
           ),
-          SizedBox(
-            height: 350,
-            child: GridView.count(
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.1,
-              children: [
-                _serviceCard(
-                  'Pet Sitting',
-                  'assets/icons/undraw_friends_xscy.svg',
-                ),
-                _serviceCard(
-                  'Pet Walking',
-                  'assets/icons/undraw_dog-walking_w27q.svg',
-                ),
-                _serviceCard(
-                  'Veterinarians',
-                  'assets/icons/undraw_doctors_djoj.svg',
-                ),
-                _serviceCard(
-                  'Pet Food',
-                  'assets/icons/undraw_breakfast_rgx5.svg',
-                ),
-              ],
-            ),
-          ),
+
+          // ~ Content
+          ServicesGridSection(),
+          SizedBox(height: 35),
+          _petCareNearby()
         ],
       ),
     );
@@ -70,32 +38,122 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
   // ###################################
 
-  Card _serviceCard(String text, String imgPath) => Card(
-        color: Colors.transparent,
-        elevation: 0,
+  Column _servicesHeader() => Column(
+        children: [
+          Text(
+            'Services',
+            style:
+                TextStyles.largeHeading.copyWith(fontWeight: FontWeight.w800),
+          ),
+          Text(
+            'Care, Love, and Tail-Wagging Happiness!',
+            style: TextStyles.baseText,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
+
+  Padding _petCareNearby() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                border: Border.all(
-                    color: AppColors.black.withOpacity(0.2), width: 1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: SvgPicture.asset(
-                imgPath,
-                width: 115,
-                height: 115,
-              ),
+            // header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Pet Care Nearby',
+                  style: TextStyles.mediumHeading,
+                ),
+                Text(
+                  'View all',
+                  style: TextStyles.smallText,
+                ),
+              ],
             ),
-            Text(
-              text,
-              style: TextStyles.mediumText,
+
+            SizedBox(height: 4),
+
+            // pet care nearby list
+            Column(
+              children: petCareList.map(
+                (petCare) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.all(10),
+                    decoration: _containerDecoration(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                _petCareAvatar(petCare),
+                                SizedBox(width: 10),
+                                _petCareDetails(petCare),
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Icon(LineIcons.verticalEllipsis),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        // pet care tags
+                        _petCareTags(petCare),
+                      ],
+                    ),
+                  );
+                },
+              ).toList(),
             )
           ],
         ),
+      );
+
+  Column _petCareDetails(PetCare petCare) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            petCare.name,
+            style: TextStyles.smallHeading,
+          ),
+          Text(
+            '${petCare.distance} km | ${petCare.rating} ⭐',
+            style: TextStyles.dimText,
+          )
+        ],
+      );
+
+  CircleAvatar _petCareAvatar(PetCare petCare) => CircleAvatar(
+        radius: 30,
+        backgroundImage: AssetImage(petCare.imageUrl),
+      );
+
+  Wrap _petCareTags(PetCare petCare) => Wrap(
+        spacing: 5,
+        children: petCare.tags
+            .map(
+              (tag) => Chip(
+                padding: EdgeInsets.all(10),
+                label: Text(tag),
+                backgroundColor: AppColors.primaryAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            )
+            .toList(),
+      );
+
+  BoxDecoration _containerDecoration() => BoxDecoration(
+        color: AppColors.secondaryAccent,
+        boxShadow: [ShadowStyles.smallShadow],
+        borderRadius: BorderRadius.circular(38),
       );
 }
