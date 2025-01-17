@@ -7,7 +7,6 @@ import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
 import 'package:paws_envy/screens/Pets/pet.screen.dart';
-import 'package:paws_envy/screens/Profile/profile.screen.dart';
 import 'package:paws_envy/widgets/custom_app_bar.dart';
 
 class NavScreenHandler extends StatefulWidget {

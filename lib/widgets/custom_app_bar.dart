@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/firebase/auth.config.dart';
 import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/shadow.styles.dart';
 import 'package:paws_envy/config/utils/text.styles.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
