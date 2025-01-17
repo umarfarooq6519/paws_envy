@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
 
 class CustomBottomNav extends StatefulWidget {
   final ValueChanged<int> onTabChange;
@@ -27,8 +26,8 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
       tabActiveBorder: Border.all(color: Colors.black, width: 1),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       gap: 6,
-      textStyle: TextStyles.baseText.copyWith(fontWeight: FontWeight.w500),
-      color: AppColors.black.withOpacity(0.4),
+      // textStyle: TextStyles.smallText.copyWith(fontWeight: FontWeight.w500),
+      color: AppColors.black.withOpacity(0.5),
       activeColor: AppColors.black,
       tabs: _tabsList, // Your tab list
     );

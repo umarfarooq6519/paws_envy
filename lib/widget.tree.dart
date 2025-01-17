@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paws_envy/screens/nav_screen.handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:paws_envy/config/firebase/auth.config.dart';
+import 'package:paws_envy/config/auth.config.dart';
 import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
 
@@ -17,7 +17,7 @@ class _WidgetTreeState extends State<WidgetTree> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: AuthModel().authStateChanges,
+      stream: AuthConfig().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final status = _checkIfNewUser();

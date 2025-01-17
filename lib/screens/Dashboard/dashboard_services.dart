@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/shadow.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/models/services.model.dart';
 
-class DashboardServicesSection extends StatefulWidget {
+class DashboardServicesSection extends StatelessWidget {
   const DashboardServicesSection({super.key});
 
-  @override
-  State<DashboardServicesSection> createState() =>
-      _DashboardServicesSectionState();
-}
-
-class _DashboardServicesSectionState extends State<DashboardServicesSection> {
   @override
   // ##### Pet Services Section #####
   Widget build(BuildContext context) {

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/shadow.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/models/pets.model.dart';
 
-class DashboardPetsSection extends StatefulWidget {
+class DashboardPetsSection extends StatelessWidget {
   const DashboardPetsSection({super.key});
 
-  @override
-  State<DashboardPetsSection> createState() => _DashboardPetsSectionState();
-}
-
-class _DashboardPetsSectionState extends State<DashboardPetsSection> {
   @override
   // ##### Pet Profiles Section #####
   Widget build(BuildContext context) {
@@ -59,7 +54,6 @@ class _DashboardPetsSectionState extends State<DashboardPetsSection> {
   }
 
   // ############################
-
   List<Widget> _sectionHeader() => [
         const Text(
           'Your Pets',

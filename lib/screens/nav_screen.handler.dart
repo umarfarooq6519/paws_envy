@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';

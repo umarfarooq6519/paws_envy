@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
 
-import 'package:paws_envy/config/firebase/auth.config.dart';
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/shadow.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -21,7 +21,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   // ##### Custom App Bar #####
   Widget build(BuildContext context) {
-    final user = context.watch<AuthModel>().currentUser;
+    final user = context.watch<AuthConfig>().currentUser;
     final userImageUrl = user?.photoURL;
     final userName = user?.displayName;
 
@@ -42,6 +42,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
+  // ##############################
+
   BoxDecoration _appBarDecoration() => BoxDecoration(
         color: AppColors.primaryAccent,
         border: Border(
@@ -60,7 +62,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
             onPressed: () {},
           ),
           const SizedBox(width: 8),
-          GestureDetector(
+          // user avatar
+          InkWell(
+            splashColor: AppColors.primary,
             onTap: () {
               Navigator.pushNamed(context, '/profile');
             },

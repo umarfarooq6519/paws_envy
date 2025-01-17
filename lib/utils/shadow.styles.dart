@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/utils/colors.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
 
 class ShadowStyles {
   static const xSmallShadow = BoxShadow(

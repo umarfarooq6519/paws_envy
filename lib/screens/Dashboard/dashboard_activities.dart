@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/models/activity.model.dart';
 
-class DashboardActivitiesSection extends StatefulWidget {
+class DashboardActivitiesSection extends StatelessWidget {
   const DashboardActivitiesSection({super.key});
 
   @override
-  State<DashboardActivitiesSection> createState() =>
-      DashboardActivitiesSectionState();
-}
-
-class DashboardActivitiesSectionState
-    extends State<DashboardActivitiesSection> {
-  @override
-  // ##### Pet Activities Section #####
   Widget build(BuildContext context) {
     return Column(
       children: [

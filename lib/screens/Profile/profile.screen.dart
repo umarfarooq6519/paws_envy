@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:provider/provider.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
-import 'package:paws_envy/config/firebase/auth.config.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
+import 'package:paws_envy/config/auth.config.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> handleSignOut() async {
-    await AuthModel().signOut();
+    await AuthConfig().signOut();
     if (mounted) {
       Navigator.pop(context);
     }
@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   // ######### Profile Page ##########
   Widget build(BuildContext context) {
-    final user = context.watch<AuthModel>().currentUser;
+    final user = context.watch<AuthConfig>().currentUser;
     final userImageUrl = user?.photoURL?.replaceFirst('s96-c', 's400-c');
     final userName = user?.displayName;
     final userEmail = user?.email;
@@ -50,8 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 SizedBox(width: 0),
                 Text(
-                  'Settings',
-                  style: TextStyles.baseHeading,
+                  'Back',
+                  style: TextStyles.smallHeading,
                 ),
               ],
             ),
