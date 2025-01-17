@@ -22,18 +22,18 @@ class CommunityGridSection extends StatelessWidget {
             'Pet Adoption',
             'assets/icons/undraw_friends_xscy.svg',
           ),
-          _communityCard(
-            'Lost and Found',
-            'assets/icons/undraw_dog-walking_w27q.svg',
-          ),
-          _communityCard(
-            'Pet Events',
-            'assets/icons/undraw_doctors_djoj.svg',
-          ),
-          _communityCard(
-            'Forumns',
-            'assets/icons/undraw_breakfast_rgx5.svg',
-          ),
+          // _communityCard(
+          //   'Lost and Found',
+          //   'assets/icons/undraw_dog-walking_w27q.svg',
+          // ),
+          // _communityCard(
+          //   'Pet Events',
+          //   'assets/icons/undraw_doctors_djoj.svg',
+          // ),
+          // _communityCard(
+          //   'Forumns',
+          //   'assets/icons/undraw_breakfast_rgx5.svg',
+          // ),
         ],
       ),
     );
