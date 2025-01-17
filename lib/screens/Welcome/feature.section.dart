@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 
 class WelcomeFeatureCard extends StatelessWidget {
   final String title;

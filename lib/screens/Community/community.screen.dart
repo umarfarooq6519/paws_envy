@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/utils/text.styles.dart';
+import 'package:paws_envy/screens/Community/community_grid.section.dart';
+import 'package:paws_envy/screens/Community/community_listing.section.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -9,17 +12,46 @@ class CommunityScreen extends StatefulWidget {
 
 class _CommunityScreenState extends State<CommunityScreen> {
   @override
+  // ##### Community Screen #####
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
+      children: [
         Center(
           child: Column(
             children: [
-              Text('Community'),
+              // ~ header
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                child: _communityHeader(),
+              ),
+
+              // ~ content
+              CommunityGridSection(),
+              SizedBox(height: 35),
+              CommunityListingSection(),
+
+              //
             ],
           ),
         ),
       ],
     );
   }
+
+  // #######################
+
+  Column _communityHeader() => Column(
+        children: [
+          Text(
+            'Community',
+            style:
+                TextStyles.largeHeading.copyWith(fontWeight: FontWeight.w800),
+          ),
+          Text(
+            'Connect, Share, and Care for Paws!',
+            style: TextStyles.baseText,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
 }

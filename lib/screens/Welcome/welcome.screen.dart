@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/constants.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/constants.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/screens/Welcome/feature.section.dart';
 import 'package:paws_envy/widgets/custom_divider.dart';
 import 'package:paws_envy/widgets/google_btn.dart';

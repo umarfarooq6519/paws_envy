@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/config/utils/colors.styles.dart';
-import 'package:paws_envy/config/utils/text.styles.dart';
+
+import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -15,59 +19,66 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
+  // ##### Custom App Bar #####
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: _appBarDecoration(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // ~ Leading Section
-            _leadingSection(),
+    final user = context.watch<AuthConfig>().currentUser;
+    final userImageUrl = user?.photoURL;
+    final userName = user?.displayName;
 
-            // ~ Actions Section
-            _actionSection(),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.only(left: 14, right: 14, bottom: 10),
+      decoration: _appBarDecoration(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // ~ Leading Section
+          _leadingSection(userName),
+
+          // ~ Actions Section
+          _actionSection(userImageUrl),
+        ],
       ),
     );
   }
 
+  // ##############################
+
   BoxDecoration _appBarDecoration() => BoxDecoration(
         color: AppColors.primaryAccent,
         border: Border(
-          bottom: BorderSide(color: AppColors.black.withOpacity(1), width: 0.3),
+          bottom: BorderSide(
+            color: AppColors.black.withOpacity(0.5),
+            width: 0.5,
+          ),
         ),
-        // boxShadow: [ShadowStyles.mediumShadow],
-        // borderRadius: BorderRadius.only(
-        //   bottomLeft: Radius.circular(28),
-        //   bottomRight: Radius.circular(28),
-        // ),
+        boxShadow: [ShadowStyles.mediumShadow],
       );
 
-  Row _actionSection() => Row(
+  Row _actionSection(String? userImageUrl) => Row(
         children: [
           IconButton(
             icon: const Icon(LineIcons.bell),
             onPressed: () {},
           ),
           const SizedBox(width: 8),
-          GestureDetector(
+          // user avatar
+          InkWell(
+            splashColor: AppColors.primary,
             onTap: () {
               Navigator.pushNamed(context, '/profile');
             },
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 24,
-              backgroundImage: AssetImage('assets/images/person_3.jpg'),
+              backgroundImage:
+                  NetworkImage(userImageUrl ?? 'https://bit.ly/3DEGQw8'),
             ),
           ),
         ],
       );
 
-  Column _leadingSection() => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Column _leadingSection(String? userName) => Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -75,7 +86,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             style: TextStyles.smallText,
           ),
           Text(
-            'Umar Farooq',
+            userName ?? 'Buddy',
             style: TextStyles.mediumHeading.copyWith(
               fontSize: 19,
             ),

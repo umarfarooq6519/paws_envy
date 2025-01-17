@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import 'package:paws_envy/config/utils/colors.styles.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
 import 'package:paws_envy/screens/Pets/pet.screen.dart';
+import 'package:paws_envy/screens/Services/services.screen.dart';
+import 'package:paws_envy/widgets/custom_bottom_nav.dart';
 import 'package:paws_envy/widgets/custom_app_bar.dart';
 
 class NavScreenHandler extends StatefulWidget {
@@ -24,9 +25,15 @@ class _NavScreenHandlerState extends State<NavScreenHandler> {
     Dashboard(),
     CommunityScreen(),
     CameraScreen(),
+    ServicesScreen(),
     PetScreen(),
-    // ProfileScreen(),
   ];
+
+  void handlePageChange(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   // ##### Screen Index Handler #####
@@ -39,13 +46,15 @@ class _NavScreenHandlerState extends State<NavScreenHandler> {
       // ##### Bottom Navigation Bar #####
 
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
+        // margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: AppColors.black,
-          borderRadius: BorderRadius.circular(30),
+          color: AppColors.secondaryAccent,
+          // borderRadius: BorderRadius.circular(30),
         ),
-        child: _bottomNav(),
+        child: CustomBottomNav(
+          onTabChange: handlePageChange,
+        ),
       ),
 
       floatingActionButton: _chatbotBtn(),
@@ -54,52 +63,15 @@ class _NavScreenHandlerState extends State<NavScreenHandler> {
 
   // ################################
 
-  FloatingActionButton _chatbotBtn() => FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        onPressed: () {},
-        child: Icon(LineIcons.robot),
+  Container _chatbotBtn() => Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.black),
+          borderRadius: BorderRadius.circular(17),
+        ),
+        child: FloatingActionButton(
+          backgroundColor: AppColors.secondary,
+          onPressed: () {},
+          child: Icon(LineIcons.robot),
+        ),
       );
-
-  GNav _bottomNav() => GNav(
-        onTabChange: (int newIndex) {
-          // switch pages according to index
-          setState(() {
-            _currentIndex = newIndex;
-          });
-        },
-        haptic: true,
-        iconSize: 24,
-        rippleColor: AppColors.primary.withOpacity(0.3),
-        tabBackgroundColor: AppColors.white.withOpacity(0.1),
-        tabBorderRadius: 22,
-        tabActiveBorder: Border.all(color: Colors.transparent, width: 1),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-        gap: 6,
-        color: AppColors.white.withOpacity(0.7),
-        activeColor: AppColors.white,
-        tabs: _tabsList, // Your tab list
-      );
-
-  List<GButton> get _tabsList => const [
-        GButton(
-          icon: LineIcons.home,
-          text: 'Home',
-        ),
-        GButton(
-          icon: LineIcons.users,
-          text: 'Community',
-        ),
-        GButton(
-          icon: LineIcons.retroCamera,
-          text: 'Camera',
-        ),
-        GButton(
-          icon: LineIcons.paw,
-          text: 'Pets',
-        ),
-        // GButton(
-        //   icon: LineIcons.user,
-        //   text: 'Profile',
-        // ),
-      ];
 }
