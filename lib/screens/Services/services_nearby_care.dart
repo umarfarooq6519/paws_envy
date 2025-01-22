@@ -4,6 +4,7 @@ import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/models/petcare.model.dart';
+import 'package:paws_envy/widgets/card_medium.dart';
 
 class ServicesNearbyCareSection extends StatelessWidget {
   const ServicesNearbyCareSection({super.key});
@@ -35,37 +36,7 @@ class ServicesNearbyCareSection extends StatelessWidget {
           Column(
             children: petCareList.map(
               (petCare) {
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  padding: EdgeInsets.all(10),
-                  decoration: _containerDecoration(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              _petCareAvatar(petCare),
-                              SizedBox(width: 10),
-                              _petCareDetails(petCare),
-                            ],
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Icon(LineIcons.verticalEllipsis),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      // pet care tags
-                      _petCareTags(petCare),
-                    ],
-                  ),
-                );
+                return CardMedium(petCare: petCare);
               },
             ).toList(),
           )
@@ -73,47 +44,4 @@ class ServicesNearbyCareSection extends StatelessWidget {
       ),
     );
   }
-
-  // #########################
-
-  CircleAvatar _petCareAvatar(PetCare petCare) => CircleAvatar(
-        radius: 30,
-        backgroundImage: AssetImage(petCare.imageUrl),
-      );
-
-  Wrap _petCareTags(PetCare petCare) => Wrap(
-        spacing: 5,
-        children: petCare.tags
-            .map(
-              (tag) => Chip(
-                padding: EdgeInsets.all(10),
-                label: Text(tag),
-                backgroundColor: AppColors.primaryAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            )
-            .toList(),
-      );
-
-  BoxDecoration _containerDecoration() => BoxDecoration(
-        color: AppColors.secondaryAccent,
-        boxShadow: [ShadowStyles.smallShadow],
-        borderRadius: BorderRadius.circular(38),
-      );
-
-  Column _petCareDetails(PetCare petCare) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            petCare.name,
-            style: TextStyles.smallHeading,
-          ),
-          Text(
-            '${petCare.distance} km | ${petCare.rating} ⭐',
-            style: TextStyles.dimText,
-          )
-        ],
-      );
 }

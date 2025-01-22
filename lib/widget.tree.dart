@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/screens/nav_screen.handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/screens/home.dart';
 import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
 
-class WidgetTree extends StatefulWidget {
+class WidgetTree extends StatelessWidget {
   const WidgetTree({super.key});
 
-  @override
-  State<WidgetTree> createState() => _WidgetTreeState();
-}
-
-class _WidgetTreeState extends State<WidgetTree> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -24,7 +19,7 @@ class _WidgetTreeState extends State<WidgetTree> {
           if (status == true) {
             return const RoleSelectionPage();
           }
-          return const NavScreenHandler();
+          return const HomePage();
         } else {
           return const WelcomeScreen();
         }

@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
 
 class ShadowStyles {
-  static const xSmallShadow = BoxShadow(
-    color: AppColors.primary,
+  static final xSmallShadow = BoxShadow(
+    color: AppColors.primary.withOpacity(0.8),
     blurRadius: 6,
     spreadRadius: 0,
   );
 
-  static const smallShadow = BoxShadow(
-    color: AppColors.primary,
+  static final smallShadow = BoxShadow(
+    color: AppColors.primary.withOpacity(0.8),
     blurRadius: 8,
     spreadRadius: 1,
   );
 
-  static const mediumShadow = BoxShadow(
-    color: AppColors.primary,
+  static final mediumShadow = BoxShadow(
+    color: AppColors.primary.withOpacity(0.8),
     blurRadius: 10,
     spreadRadius: 2,
   );
 
-  static const largeShadow = BoxShadow(
-    color: AppColors.primary,
+  static final largeShadow = BoxShadow(
+    color: AppColors.primary.withOpacity(0.8),
     blurRadius: 12,
     spreadRadius: 3,
   );

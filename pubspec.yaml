@@ -1,7 +1,6 @@
 name: paws_envy
 description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
+
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -38,29 +37,15 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - .env
     - assets/fonts/
     - assets/images/
     - assets/animations/
     - assets/icons/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
 
   fonts:
     - family: Montserrat
@@ -77,6 +62,3 @@ flutter:
           weight: 700
         - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
           weight: 800
-
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package

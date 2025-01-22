@@ -68,7 +68,7 @@ class DashboardPetsSection extends StatelessWidget {
   BoxDecoration _cardDecoration() => BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(30),
-        boxShadow: const [
+        boxShadow: [
           ShadowStyles.smallShadow,
         ],
       );

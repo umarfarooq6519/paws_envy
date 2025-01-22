@@ -42,6 +42,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PawsEnvy',
       debugShowCheckedModeBanner: false,
+
+      // Theme Data
       theme: ThemeData(
         useMaterial3: true,
         iconTheme: const IconThemeData(
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Montserrat',
       ),
+
       // widget tree is the primary location of the app
       home: const WidgetTree(),
       routes: {

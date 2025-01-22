@@ -71,6 +71,6 @@ class DashboardServicesSection extends StatelessWidget {
   BoxDecoration _cardDecoration() => BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [ShadowStyles.smallShadow],
+        boxShadow: [ShadowStyles.smallShadow],
       );
 }
