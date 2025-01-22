@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:paws_envy/utils/colors.styles.dart';
-import 'package:paws_envy/utils/shadow.styles.dart';
-import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/widgets/pet_card_large.dart';
 
 class PetScreen extends StatefulWidget {
