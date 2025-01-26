@@ -18,7 +18,7 @@ class DashboardPetsSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _sectionHeader(),
+            children: _sectionHeader(context),
           ),
         ),
 
@@ -54,40 +54,48 @@ class DashboardPetsSection extends StatelessWidget {
   }
 
   // ############################
-  List<Widget> _sectionHeader() => [
-        const Text(
-          'Your Pets',
-          style: TextStyles.mediumHeading,
-        ),
-        Text(
-          'View All',
-          style: TextStyles.smallText,
-        )
-      ];
+  List<Widget> _sectionHeader(BuildContext context) {
+    return [
+      const Text(
+        'Your Pets',
+        style: TextStyles.mediumHeading,
+      ),
+      Text(
+        'View All',
+        style: TextStyles.smallText,
+      ),
+    ];
+  }
 
-  BoxDecoration _cardDecoration() => BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          ShadowStyles.smallShadow,
-        ],
-      );
+  BoxDecoration _cardDecoration() {
+    return BoxDecoration(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(30),
+      boxShadow: [
+        ShadowStyles.smallShadow,
+      ],
+    );
+  }
 
-  Chip _petLabel(Pet pet) => Chip(
-        backgroundColor: AppColors.primaryAccent,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
-        label: Text(pet.name),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: AppColors.black, width: 1),
-        ),
-      );
+  Chip _petLabel(Pet pet) {
+    return Chip(
+      backgroundColor: AppColors.primaryAccent,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 8,
+      ),
+      label: Text(pet.name),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: const BorderSide(color: AppColors.black, width: 1),
+      ),
+    );
+  }
 
-  CircleAvatar _petAvatar(Pet pet) => CircleAvatar(
-        radius: 44,
-        backgroundImage: AssetImage(pet.imageUrl),
-      );
+  CircleAvatar _petAvatar(Pet pet) {
+    return CircleAvatar(
+      radius: 44,
+      backgroundImage: AssetImage(pet.imageUrl),
+    );
+  }
 }

@@ -20,9 +20,14 @@ class ServicesNearbyCareSection extends StatelessWidget {
                 'Pet Care Nearby',
                 style: TextStyles.mediumHeading,
               ),
-              Text(
-                'View all',
-                style: TextStyles.smallText,
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/pet_care_nearby');
+                },
+                child: Text(
+                  'View All',
+                  style: TextStyles.smallText,
+                ),
               ),
             ],
           ),

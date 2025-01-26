@@ -16,7 +16,7 @@ class PrimaryBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 50,
+      height: 52,
       child: FilledButton.tonal(
         onPressed: onPressed,
         style: _btnStyling(),

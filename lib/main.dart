@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:paws_envy/widget.tree.dart';
+import 'package:paws_envy/widget_tree.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/config/firebase_options.dart';
 import 'package:paws_envy/config/auth.config.dart';
-import 'package:paws_envy/screens/Profile/profile.screen.dart';
-import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
-import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
-import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,12 +57,7 @@ class MyApp extends StatelessWidget {
 
       // widget tree is the primary location of the app
       home: const WidgetTree(),
-      routes: {
-        '/welcome': (context) => const WelcomeScreen(),
-        '/role': (context) => const RoleSelectionPage(),
-        '/dash': (context) => const Dashboard(),
-        '/profile': (context) => const ProfileScreen(),
-      },
+      routes: AppRoutes.routes,
     );
   }
 }

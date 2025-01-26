@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 
-class SearchBarField extends StatefulWidget {
+class SearchBarField extends StatelessWidget {
   const SearchBarField({super.key});
 
-  @override
-  State<SearchBarField> createState() => _SearchBarFieldState();
-}
-
-class _SearchBarFieldState extends State<SearchBarField> {
   @override
   // ##### Search bar field #####
   Widget build(BuildContext context) {

@@ -5,7 +5,12 @@ import 'package:paws_envy/utils/text.styles.dart';
 class PetOwnerCardMedium extends StatelessWidget {
   const PetOwnerCardMedium({
     super.key,
+    required this.ownerName,
+    required this.ownerLocation,
   });
+
+  final String ownerName;
+  final String ownerLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +37,11 @@ class PetOwnerCardMedium extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'You',
+                    ownerName,
                     style: TextStyles.smallHeading,
                   ),
                   Text(
-                    "Pet's Owner",
+                    "Pet Owner",
                     style: TextStyles.dimText,
                   ),
                 ],
@@ -48,7 +53,7 @@ class PetOwnerCardMedium extends StatelessWidget {
             children: [
               Text(
                 'Location',
-                style: TextStyles.smallHeading,
+                style: TextStyles.smallHeading.copyWith(fontSize: 16),
               ),
               Text(
                 'Lahore, Pakistan',

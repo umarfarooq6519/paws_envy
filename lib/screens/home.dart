@@ -46,7 +46,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ### AppBar
       appBar: const CustomAppBar(),
+
+      // ### Body
       body: PageView.builder(
         controller: _pageController,
         itemCount: _pages.length,
@@ -56,6 +59,8 @@ class _HomePageState extends State<HomePage> {
           return _pages[index];
         },
       ),
+
+      // ### Bottom Nav
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
         decoration: BoxDecoration(
@@ -63,9 +68,13 @@ class _HomePageState extends State<HomePage> {
         ),
         child: _bottomNavBar(),
       ),
+
+      // ### FLoating Action Button
       floatingActionButton: _chatbotBtn(),
     );
   }
+
+  // #######################
 
   GNav _bottomNavBar() {
     return GNav(
@@ -99,26 +108,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<GButton> get _navList => const [
-        GButton(
-          icon: LineIcons.home,
-          text: 'Home',
-        ),
-        GButton(
-          icon: LineIcons.users,
-          text: 'Community',
-        ),
-        GButton(
-          icon: LineIcons.retroCamera,
-          text: 'Camera',
-        ),
-        GButton(
-          icon: LineIcons.heartbeat,
-          text: 'Services',
-        ),
-        GButton(
-          icon: LineIcons.paw,
-          text: 'My Pets',
-        ),
-      ];
+  List<GButton> get _navList {
+    return const [
+      GButton(
+        icon: LineIcons.home,
+        text: 'Home',
+      ),
+      GButton(
+        icon: LineIcons.users,
+        text: 'Community',
+      ),
+      GButton(
+        icon: LineIcons.retroCamera,
+        text: 'Camera',
+      ),
+      GButton(
+        icon: LineIcons.heartbeat,
+        text: 'Services',
+      ),
+      GButton(
+        icon: LineIcons.paw,
+        text: 'My Pets',
+      ),
+    ];
+  }
 }

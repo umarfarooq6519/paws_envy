@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
             child: SearchBarField(),
           ),
           DashboardPetsSection(),

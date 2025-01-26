@@ -15,7 +15,7 @@ class WidgetTree extends StatelessWidget {
       stream: AuthConfig().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final status = _checkIfNewUser();
+          final Future<bool> status = _checkIfNewUser();
           if (status == true) {
             return const RoleSelectionPage();
           }

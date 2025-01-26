@@ -12,7 +12,7 @@ class GoogleBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 55,
+      height: 52,
       child: FilledButton.tonal(
         onPressed: () async {
           try {

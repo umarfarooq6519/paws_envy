@@ -23,6 +23,8 @@ class AuthConfig extends ChangeNotifier {
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
+      print('isNewUser? ${userCredential.additionalUserInfo?.isNewUser}');
+
       notifyListeners();
     } catch (e) {
       throw Exception('signInWithGoogle() error: $e');

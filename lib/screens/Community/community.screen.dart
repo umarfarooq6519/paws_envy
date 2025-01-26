@@ -47,18 +47,19 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   // #######################
 
-  Column _communityHeader() => Column(
-        children: [
-          Text(
-            'Community',
-            style:
-                TextStyles.largeHeading.copyWith(fontWeight: FontWeight.w800),
-          ),
-          Text(
-            'Connect, Share, and Care for Paws!',
-            style: TextStyles.baseText,
-            textAlign: TextAlign.center,
-          ),
-        ],
-      );
+  Column _communityHeader() {
+    return Column(
+      children: [
+        Text(
+          'Community',
+          style: TextStyles.largeHeading.copyWith(fontWeight: FontWeight.w800),
+        ),
+        Text(
+          'Connect, Share, and Care for Paws!',
+          style: TextStyles.baseText,
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
 }
