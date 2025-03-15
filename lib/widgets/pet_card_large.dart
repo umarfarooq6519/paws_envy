@@ -1,14 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
+import 'package:paws_envy/widgets/pet_owner_card_medium.dart';
 
 class PetCardLarge extends StatelessWidget {
-  const PetCardLarge({super.key, required this.petProfile});
+  const PetCardLarge(
+      {super.key, required this.petProfile, required this.currentUser});
 
   final Map<String, dynamic> petProfile;
+  final User? currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +31,17 @@ class PetCardLarge extends StatelessWidget {
           padding: EdgeInsets.all(14),
           child: Column(
             children: [
-              SizedBox(
-                width: double.infinity,
-                height: 300,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    petProfile['imgURL'],
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 300,
+              //   child: ClipRRect(
+              //     borderRadius: BorderRadius.circular(20),
+              //     child: Image.asset(
+              //       petProfile['imgURL'],
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
 
               SizedBox(height: 15),
 
@@ -59,7 +63,9 @@ class PetCardLarge extends StatelessWidget {
                             color: AppColors.primary.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Icon(petProfile['gender']),
+                          child: Icon(petProfile['gender'] == "Male"
+                              ? Icons.male
+                              : Icons.female),
                         )
                       ],
                     ),
@@ -165,7 +171,7 @@ class PetCardLarge extends StatelessWidget {
                           'Energy Level',
                           style: TextStyles.smallHeading,
                         ),
-                        Text(petProfile['energy']),
+                        Text(petProfile['energyLevel']),
                       ],
                     ),
                   ],
@@ -185,7 +191,7 @@ class PetCardLarge extends StatelessWidget {
                           'Health Conditions',
                           style: TextStyles.smallHeading,
                         ),
-                        Text(petProfile['health']),
+                        Text(petProfile['condition']),
                       ],
                     ),
                   ],
@@ -202,10 +208,10 @@ class PetCardLarge extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Vaccination Status',
+                          'Vaccinated',
                           style: TextStyles.smallHeading,
                         ),
-                        Text('Vaccinated ${petProfile['vaccination']}'),
+                        Text('${petProfile['isVaccinated']}'),
                       ],
                     ),
                   ],
@@ -215,7 +221,11 @@ class PetCardLarge extends StatelessWidget {
               SizedBox(height: 8),
 
               // Pet Owner Card
-              petProfile['owner']
+              PetOwnerCardMedium(
+                ownerName: petProfile['userName'],
+                ownerEmail: petProfile['userEmail'],
+                ownerAvatar: petProfile['userAvatar'],
+              ),
             ],
           )),
     );

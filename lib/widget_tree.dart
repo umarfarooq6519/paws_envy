@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/services/auth.service.dart';
 import 'package:paws_envy/screens/home.dart';
 import 'package:paws_envy/screens/RoleSelection/roleselection.screen.dart';
 import 'package:paws_envy/screens/Welcome/welcome.screen.dart';
@@ -12,7 +12,7 @@ class WidgetTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: AuthConfig().authStateChanges,
+      stream: AuthService().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final Future<bool> status = _checkIfNewUser();

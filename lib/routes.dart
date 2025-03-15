@@ -12,6 +12,6 @@ class AppRoutes {
     '/role': (context) => const RoleSelectionPage(),
     '/dash': (context) => const Dashboard(),
     '/profile': (context) => const ProfileScreen(),
-    '/pet_care_nearby': (context) => const NearbyPetCare(),
+    '/pet_care_nearby': (context) => NearbyPetCare(),
   };
 }

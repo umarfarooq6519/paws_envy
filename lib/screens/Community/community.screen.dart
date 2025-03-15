@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:paws_envy/models/petcare.model.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/screens/Community/community_chips.section.dart';
 import 'package:paws_envy/widgets/card_medium.dart';
+import 'package:paws_envy/widgets/forms/lost_found.form.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -33,9 +35,35 @@ class _CommunityScreenState extends State<CommunityScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
-                  children: petCareList.map((petCare) {
-                    return CardMedium(petCare: petCare);
-                  }).toList(),
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          // backgroundColor: AppColors.secondary,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: AppColors.black.withValues(alpha: 0.1),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        onPressed: () {
+                          showLostFoundModal(context);
+                        },
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: petCareList.map((petCare) {
+                        return CardMedium(petCare: petCare);
+                      }).toList(),
+                    )
+                  ],
                 ),
               ),
             ],

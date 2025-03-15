@@ -40,9 +40,24 @@ class DashboardPetsSection extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _petAvatar(pet),
+                    CircleAvatar(
+                      radius: 44,
+                      backgroundImage: AssetImage(pet.imageUrl),
+                    ),
                     const SizedBox(height: 5),
-                    _petLabel(pet),
+                    Chip(
+                      backgroundColor: AppColors.primaryAccent,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      label: Text(pet.name),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side:
+                            const BorderSide(color: AppColors.black, width: 1),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -74,28 +89,6 @@ class DashboardPetsSection extends StatelessWidget {
       boxShadow: [
         ShadowStyles.smallShadow,
       ],
-    );
-  }
-
-  Chip _petLabel(Pet pet) {
-    return Chip(
-      backgroundColor: AppColors.primaryAccent,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 8,
-      ),
-      label: Text(pet.name),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(color: AppColors.black, width: 1),
-      ),
-    );
-  }
-
-  CircleAvatar _petAvatar(Pet pet) {
-    return CircleAvatar(
-      radius: 44,
-      backgroundImage: AssetImage(pet.imageUrl),
     );
   }
 }
