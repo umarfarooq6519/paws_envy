@@ -6,8 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:paws_envy/widget_tree.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
-import 'package:paws_envy/config/firebase_options.dart';
-import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/services/firebase_options.dart';
+import 'package:paws_envy/services/auth.service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AuthConfig(),
+          create: (_) => AuthService(),
         ),
       ],
       child: MyApp(),

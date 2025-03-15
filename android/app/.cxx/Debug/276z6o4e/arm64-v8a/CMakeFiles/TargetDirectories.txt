@@ -1,0 +1,2 @@
+D:/repos/flutter/paws_envy/android/app/.cxx/Debug/276z6o4e/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/repos/flutter/paws_envy/android/app/.cxx/Debug/276z6o4e/arm64-v8a/CMakeFiles/rebuild_cache.dir

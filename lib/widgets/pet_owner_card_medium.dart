@@ -6,11 +6,13 @@ class PetOwnerCardMedium extends StatelessWidget {
   const PetOwnerCardMedium({
     super.key,
     required this.ownerName,
-    required this.ownerLocation,
+    required this.ownerEmail,
+    required this.ownerAvatar,
   });
 
   final String ownerName;
-  final String ownerLocation;
+  final String ownerEmail;
+  final String ownerAvatar;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class PetOwnerCardMedium extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/images/person_3.jpg'),
+                backgroundImage: NetworkImage(ownerAvatar),
                 radius: 28,
                 backgroundColor: AppColors.primary,
               ),
@@ -41,26 +43,13 @@ class PetOwnerCardMedium extends StatelessWidget {
                     style: TextStyles.smallHeading,
                   ),
                   Text(
-                    "Pet Owner",
+                    ownerEmail,
                     style: TextStyles.dimText,
-                  ),
+                  )
                 ],
               ),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                'Location',
-                style: TextStyles.smallHeading.copyWith(fontSize: 16),
-              ),
-              Text(
-                'Lahore, Pakistan',
-                style: TextStyles.dimText,
-              ),
-            ],
-          )
         ],
       ),
     );

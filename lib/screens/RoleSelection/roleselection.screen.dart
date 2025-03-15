@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/services/auth.service.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/widgets/primary_btn.dart';
@@ -15,11 +15,11 @@ class RoleSelectionPage extends StatefulWidget {
 }
 
 class _RoleSelectionPageState extends State<RoleSelectionPage> {
-  final User? user = AuthConfig().currentUser;
+  final User? user = AuthService().currentUser;
   get firstName => user?.displayName?.split(' ')[0];
 
   Future<void> handleSignOut() async {
-    await AuthConfig().signOut();
+    await AuthService().signOut();
     print('User Signed Out');
   }
 

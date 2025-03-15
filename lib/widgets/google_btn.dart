@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/services/auth.service.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
@@ -16,7 +16,7 @@ class GoogleBtn extends StatelessWidget {
       child: FilledButton.tonal(
         onPressed: () async {
           try {
-            await AuthConfig().signInWithGoogle();
+            await AuthService().signInWithGoogle();
             // Navigator.pushNamed(context, '/role');
           } catch (e) {
             // Handle errors, e.g., display an error message to the user

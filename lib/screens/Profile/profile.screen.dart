@@ -5,7 +5,7 @@ import 'package:paws_envy/utils/shadow.styles.dart';
 
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
-import 'package:paws_envy/config/auth.config.dart';
+import 'package:paws_envy/services/auth.service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // #### function to handle user signout
   Future<void> handleSignOut() async {
-    await AuthConfig().signOut();
+    await AuthService().signOut();
     if (mounted) {
       Navigator.pop(context);
     }
@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     // initializing auth model
-    user = AuthConfig().currentUser;
+    user = AuthService().currentUser;
     userImageUrl = user?.photoURL?.replaceFirst('s96-c', 's200-c');
     userName = user?.displayName;
     userEmail = user?.email;
@@ -115,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _settingsItem(
                       'About', LineIcons.infoCircle, AppColors.black, () {}),
                   _settingsItem('Sign Out', LineIcons.alternateSignOut,
-                      AppColors.red, handleSignOut)
+                      AppColors.error, handleSignOut)
                 ],
               ),
             ),
