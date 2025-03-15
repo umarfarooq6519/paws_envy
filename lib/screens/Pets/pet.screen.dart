@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:paws_envy/services/auth.service.dart';
 import 'package:paws_envy/services/db.service.dart';
+import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
+import 'package:paws_envy/utils/text.styles.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:paws_envy/widgets/pet_card_large.dart';
 
@@ -35,17 +38,6 @@ class _PetScreenState extends State<PetScreen> {
   String? isVaccinated;
   String? energyLevel;
   File? _selectedImage;
-
-  Future<void> loadUserPets() async {
-    try {
-      List<Map<String, dynamic>> pets = await _db.fetchUserPets();
-      setState(() {
-        _petProfiles = pets;
-      });
-    } catch (e) {
-      print("Error loading pets: $e");
-    }
-  }
 
   Future<void> onPetSubmit() async {
     final String name = nameController.value.text;
@@ -78,6 +70,8 @@ class _PetScreenState extends State<PetScreen> {
         .addPetToFirestore(name, age, breed, bio, gender!, isVaccinated!,
             activity, condition, energyLevel!)
         .then((e) {
+      _fetchPets();
+
       Navigator.pop(context);
     });
   }
@@ -227,46 +221,58 @@ class _PetScreenState extends State<PetScreen> {
     );
   }
 
+  void _fetchPets() async {
+    List<Map<String, dynamic>> pets = await _db.fetchUserPets();
+
+    setState(() {
+      _petProfiles = pets;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    loadUserPets();
     currentUser = _auth.currentUser;
+    _fetchPets();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        IconButton(
-          style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(Colors.black38),
-          ),
-          onPressed: _showPetModal,
-          icon: Icon(Icons.add),
-        ),
-        // #### Pets PageView
         Expanded(
-          child: _petProfiles.isEmpty
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('No Pets Added 😔'),
-                  ],
-                )
-              : PageView.builder(
-                  pageSnapping: true,
-                  controller: _petSliderController,
-                  itemCount: _petProfiles.length,
-                  itemBuilder: (context, index) {
-                    final profile = _petProfiles[index];
+          child: FutureBuilder<List<Map<String, dynamic>>>(
+            future: _db.fetchUserPets(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return _newPetCard(context);
+              }
 
-                    return PetCardLarge(
-                      petProfile: profile,
-                      currentUser: currentUser,
-                    );
-                  },
-                ),
+              _petProfiles = snapshot.data!;
+
+              return PageView.builder(
+                pageSnapping: true,
+                controller: _petSliderController,
+                itemCount:
+                    _petProfiles.length + 1, // +1 to add the "Add Pet" card
+                itemBuilder: (context, index) {
+                  if (index == _petProfiles.length) {
+                    return _newPetCard(context);
+                  }
+
+                  final profile = _petProfiles[index];
+                  return PetCardLarge(
+                    petProfile: profile,
+                    currentUser: currentUser,
+                  );
+                },
+              );
+            },
+          ),
         ),
 
         // #### SmoothPageIndicator
@@ -274,16 +280,54 @@ class _PetScreenState extends State<PetScreen> {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SmoothPageIndicator(
             controller: _petSliderController,
-            count: _petProfiles.length,
+            count: _petProfiles.length + 1, // Include "Add Pet" widget in count
             effect: WormEffect(
               dotHeight: 10,
               dotWidth: 10,
               activeDotColor: Colors.purple.shade200,
               dotColor: Colors.grey.shade400,
-            ), // Customize effect as needed
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  Container _newPetCard(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        border: Border.all(color: AppColors.secondary),
+        boxShadow: [ShadowStyles.mediumShadow],
+        borderRadius: BorderRadius.circular(28),
+      ),
+      margin: EdgeInsets.all(16),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OutlinedButton(
+              onPressed: _showPetModal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Add Pet',
+                    style: TextStyles.btnText,
+                  ),
+                  SizedBox(width: 6),
+                  Icon(
+                    Icons.add,
+                    size: 22,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

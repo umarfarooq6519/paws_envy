@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:paws_envy/services/db.service.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
-import 'package:paws_envy/models/pets.model.dart';
 
 class DashboardPetsSection extends StatelessWidget {
-  const DashboardPetsSection({super.key});
+  final DBservice _db = DBservice();
+
+  DashboardPetsSection({super.key});
 
   @override
-  // ##### Pet Profiles Section #####
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -18,7 +18,16 @@ class DashboardPetsSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _sectionHeader(context),
+            children: [
+              const Text(
+                'Your Pets',
+                style: TextStyles.mediumHeading,
+              ),
+              Text(
+                'View All',
+                style: TextStyles.smallText,
+              ),
+            ],
           ),
         ),
 
@@ -26,60 +35,62 @@ class DashboardPetsSection extends StatelessWidget {
 
         // ~ content
         SizedBox(
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(8),
-            itemCount: pets.length,
-            itemBuilder: (context, index) {
-              final pet = pets[index];
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                width: 160,
-                decoration: _cardDecoration(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 44,
-                      backgroundImage: AssetImage(pet.imageUrl),
+          height: 160,
+          child: FutureBuilder<List<Map<String, dynamic>>>(
+            future: _db.fetchUserPets(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('No Pets Added 😔'));
+              }
+
+              final pets = snapshot.data!;
+
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.all(8),
+                itemCount: pets.length,
+                itemBuilder: (context, index) {
+                  final petProfile = pets[index];
+                  print('fetching pets: $petProfile');
+
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    width: 200,
+                    decoration: _cardDecoration(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 5),
+                        Chip(
+                          backgroundColor: AppColors.primaryAccent,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          label: Text(petProfile['name']),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: const BorderSide(
+                                color: AppColors.black, width: 1),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                            '${petProfile['age']} yrs - ${petProfile['gender']}')
+                      ],
                     ),
-                    const SizedBox(height: 5),
-                    Chip(
-                      backgroundColor: AppColors.primaryAccent,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      label: Text(pet.name),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side:
-                            const BorderSide(color: AppColors.black, width: 1),
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               );
             },
           ),
         )
       ],
     );
-  }
-
-  // ############################
-  List<Widget> _sectionHeader(BuildContext context) {
-    return [
-      const Text(
-        'Your Pets',
-        style: TextStyles.mediumHeading,
-      ),
-      Text(
-        'View All',
-        style: TextStyles.smallText,
-      ),
-    ];
   }
 
   BoxDecoration _cardDecoration() {
