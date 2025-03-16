@@ -1,18 +1,83 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:paws_envy/services/db.service.dart';
 
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/widgets/pet_owner_card_medium.dart';
 
-class PetCardLarge extends StatelessWidget {
+class PetCardLarge extends StatefulWidget {
   const PetCardLarge(
       {super.key, required this.petProfile, required this.currentUser});
 
   final Map<String, dynamic> petProfile;
   final User? currentUser;
+
+  @override
+  State<PetCardLarge> createState() => _PetCardLargeState();
+}
+
+class _PetCardLargeState extends State<PetCardLarge> {
+  String? selectedValue;
+
+  final DBservice _db = DBservice();
+
+  void showLostFoundModal(BuildContext context) {
+    final profile = widget.petProfile;
+
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        return Wrap(
+          children: [
+            ListTile(
+                leading: Icon(Icons.pets),
+                title: Text('Mark as Lost'),
+                onTap: () {
+                  _db.markPetAsLost(profile);
+                  Navigator.pop(context);
+                }),
+            ListTile(
+              leading: Icon(Icons.search),
+              title: Text('Mark as Found'),
+              onTap: () {
+                _db.removePetFromLostFound(profile['petID']);
+                Navigator.pop(context);
+                // Handle action
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.volunteer_activism),
+              title: Text('Mark for adoption'),
+              onTap: () {
+                _db.markPetForAdoption(profile);
+                Navigator.pop(context);
+                // Handle action
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.cancel),
+              title: Text('Remove from adoption'),
+              onTap: () {
+                _db.removePetFromAdoption(profile['petID']);
+                Navigator.pop(context);
+              },
+            ),
+            // ListTile(
+            //   leading: Icon(Icons.cancel),
+            //   title: Text('Cancel'),
+            //   onTap: () => Navigator.pop(context),
+            // ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +119,28 @@ class PetCardLarge extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        petProfile['name'],
+                        widget.petProfile['name'],
                         style: TextStyles.mediumHeading,
                       ),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Icon(petProfile['gender'] == "Male"
-                            ? Icons.male
-                            : Icons.female),
-                      )
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () => showLostFoundModal(context),
+                            child: Icon(Icons.menu),
+                          ),
+                          SizedBox(width: 10),
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(widget.petProfile['gender'] == "Male"
+                                ? Icons.male
+                                : Icons.female),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
 
@@ -77,7 +151,7 @@ class PetCardLarge extends StatelessWidget {
                     enabled: false,
                     style: TextStyles.baseText,
                     controller: TextEditingController(
-                      text: petProfile['bio'],
+                      text: widget.petProfile['bio'],
                     ),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -104,7 +178,7 @@ class PetCardLarge extends StatelessWidget {
                       style: TextStyles.smallHeading,
                     ),
                     Text(
-                      petProfile['age'],
+                      widget.petProfile['age'],
                       style: TextStyles.dimText,
                     ),
                   ],
@@ -128,7 +202,7 @@ class PetCardLarge extends StatelessWidget {
                       style: TextStyles.smallHeading,
                     ),
                     Text(
-                      petProfile['breed'],
+                      widget.petProfile['breed'],
                       style: TextStyles.dimText,
                     ),
                   ],
@@ -151,7 +225,7 @@ class PetCardLarge extends StatelessWidget {
                         'Favorite Activity',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(petProfile['activity']),
+                      Text(widget.petProfile['activity']),
                     ],
                   ),
                 ],
@@ -171,7 +245,7 @@ class PetCardLarge extends StatelessWidget {
                         'Energy Level',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(petProfile['energyLevel']),
+                      Text(widget.petProfile['energyLevel']),
                     ],
                   ),
                 ],
@@ -191,7 +265,7 @@ class PetCardLarge extends StatelessWidget {
                         'Health Conditions',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(petProfile['condition']),
+                      Text(widget.petProfile['condition']),
                     ],
                   ),
                 ],
@@ -211,7 +285,7 @@ class PetCardLarge extends StatelessWidget {
                         'Vaccinated',
                         style: TextStyles.smallHeading,
                       ),
-                      Text('${petProfile['isVaccinated']}'),
+                      Text('${widget.petProfile['isVaccinated']}'),
                     ],
                   ),
                 ],
@@ -222,13 +296,44 @@ class PetCardLarge extends StatelessWidget {
 
             // Pet Owner Card
             PetOwnerCardMedium(
-              ownerName: petProfile['userName'],
-              ownerEmail: petProfile['userEmail'],
-              ownerAvatar: petProfile['userAvatar'],
+              ownerName: widget.petProfile['userName'],
+              ownerEmail: widget.petProfile['userEmail'],
+              ownerAvatar: widget.petProfile['userAvatar'],
             ),
           ],
         ),
       ),
     );
   }
+
+  // void showDropdownModal() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (context) {
+  //       return Padding(
+  //         padding: EdgeInsets.all(16),
+  //         child: buildDropdown(),
+  //       );
+  //     },
+  //   );
+  // }
+
+  // Widget buildDropdown() {
+  //   return DropdownButtonFormField<String>(
+  //     value: selectedValue,
+  //     decoration: InputDecoration(
+  //       labelText: "Select an option",
+  //       border: OutlineInputBorder(),
+  //     ),
+  //     items: ["Lost", "Found"].map((String item) {
+  //       return DropdownMenuItem(
+  //         value: item,
+  //         child: Text(item),
+  //       );
+  //     }).toList(),
+  //     onChanged: (value) {
+  //       selectedValue = value;
+  //     },
+  //   );
+  // }
 }

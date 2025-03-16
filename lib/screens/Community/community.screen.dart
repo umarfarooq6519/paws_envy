@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paws_envy/models/petcare.model.dart';
+import 'package:paws_envy/services/db.service.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
+import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
-import 'package:paws_envy/screens/Community/community_chips.section.dart';
-import 'package:paws_envy/widgets/card_medium.dart';
-import 'package:paws_envy/widgets/forms/lost_found.form.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -14,80 +12,170 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
+  final DBservice _db = DBservice();
+
+  final List<String> categories = ["Lost & Found", "Pet Adoption"];
+  int selectedIndex = 0;
+
   @override
-  // ##### Community Screen #####
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        Center(
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
             children: [
-              // ~ header
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-                child: _communityHeader(),
-              ),
-
-              // ~ content
-              CommunityChips(),
-
-              // community listing
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          // backgroundColor: AppColors.secondary,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: AppColors.black.withValues(alpha: 0.1),
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        onPressed: () {
-                          showLostFoundModal(context);
-                        },
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      children: petCareList.map((petCare) {
-                        return CardMedium(petCare: petCare);
-                      }).toList(),
-                    )
-                  ],
-                ),
-              ),
+              Text('Community',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text('Connect, Share, and Care for Paws!',
+                  textAlign: TextAlign.center),
             ],
           ),
+        ),
+
+        // Category Chips
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(categories.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: ChoiceChip(
+                  checkmarkColor: Colors.white,
+                  label: Text(categories[index]),
+                  selected: selectedIndex == index,
+                  onSelected: (bool selected) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                  selectedColor:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                  // backgroundColor: Colors.grey[200],
+                  labelStyle: TextStyle(
+                      color:
+                          selectedIndex == index ? Colors.white : Colors.black),
+                ),
+              );
+            }),
+          ),
+        ),
+
+        SizedBox(height: 10),
+
+        // Content Based on Selection
+        Expanded(
+          child: selectedIndex == 0
+              ? _buildLostFoundSection()
+              : _buildPetAdoptionSection(),
         ),
       ],
     );
   }
 
-  // #######################
+  Widget _buildLostFoundSection() {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _db.fetchLostFound(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text('No Pets Found'));
+        }
 
-  Column _communityHeader() {
-    return Column(
-      children: [
-        Text(
-          'Community',
-          style: TextStyles.largeHeading.copyWith(fontWeight: FontWeight.w800),
-        ),
-        Text(
-          'Connect, Share, and Care for Paws!',
-          style: TextStyles.baseText,
-          textAlign: TextAlign.center,
-        ),
-      ],
+        return ListView.builder(
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            final profile = snapshot.data![index];
+            return Card(
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    boxShadow: [
+                      ShadowStyles.smallShadow,
+                    ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(),
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profile['name'],
+                            style: TextStyles.smallHeading,
+                          ),
+                          Text("${profile['age']} yrs - ${profile['breed']}"),
+                        ],
+                      ),
+                      Icon(
+                        profile['gender'] == 'Male' ? Icons.male : Icons.female,
+                      ),
+                    ],
+                  ),
+                ));
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildPetAdoptionSection() {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _db.fetchAdoptionListing(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text('No Pets Found'));
+        }
+
+        return ListView.builder(
+          itemCount: snapshot.data!.length,
+          itemBuilder: (context, index) {
+            final profile = snapshot.data![index];
+            return Card(
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    boxShadow: [
+                      ShadowStyles.smallShadow,
+                    ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(),
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profile['name'],
+                            style: TextStyles.smallHeading,
+                          ),
+                          Text("${profile['age']} yrs - ${profile['breed']}"),
+                        ],
+                      ),
+                      Icon(
+                        profile['gender'] == 'Male' ? Icons.male : Icons.female,
+                      ),
+                    ],
+                  ),
+                ));
+          },
+        );
+      },
     );
   }
 }
