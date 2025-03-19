@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:paws_envy/utils/text.styles.dart';
-import 'package:paws_envy/screens/Services/services_nearby_care.dart';
+import 'package:paws_envy/screens/Services/services_veterinarians.dart';
 import 'package:paws_envy/screens/Services/services_grid.dart';
 
 class ServicesScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
           // ~ Content
           ServicesGridSection(),
           SizedBox(height: 35),
-          ServicesNearbyCareSection(),
+          ServicesVeterinarians(),
         ],
       ),
     );

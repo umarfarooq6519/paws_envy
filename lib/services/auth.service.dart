@@ -13,19 +13,31 @@ class AuthService extends ChangeNotifier {
 
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignIn googleSignIn = GoogleSignIn();
 
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      // Ensure previous sessions are cleared
+      await googleSignIn.signOut();
+      // await googleSignIn.disconnect();
+
+      final GoogleAuthProvider googleProvider = GoogleAuthProvider();
+      googleProvider.setCustomParameters({'prompt': 'select_account'});
+
+      // Sign in and get user data
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) return; // User canceled login
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       final result = await _auth.signInWithCredential(credential);
 
-      // if new user then add to firestore
+      // If new user, add to Firestore
       if (result.additionalUserInfo!.isNewUser) {
         addUserToFirestore(
             result.user!.uid, result.user!.email, result.user!.photoURL);
@@ -41,12 +53,31 @@ class AuthService extends ChangeNotifier {
     await _auth.signOut();
   }
 
+  Future<String> getUserRole(String userID) async {
+    try {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .get();
+
+      if (userDoc.exists) {
+        var data = userDoc.data() as Map<String, dynamic>;
+        return data['role'] ?? "unknown"; // Defaults to "unknown" if null
+      }
+      return "unknown"; // User document does not exist
+    } catch (e) {
+      print("Error fetching user role: $e");
+      return "unknown";
+    }
+  }
+
   Future<void> addUserToFirestore(
       String userID, String? userEmail, String? avatarUrl) async {
     final user = <String, dynamic>{
       'uid': userID,
       'email': userEmail,
       'avatarUrl': avatarUrl,
+      'role': null,
     };
 
     print('Trying to add user to firestore');

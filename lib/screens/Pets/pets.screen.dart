@@ -1,25 +1,24 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:paws_envy/services/auth.service.dart';
 import 'package:paws_envy/services/db.service.dart';
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
+import 'package:paws_envy/widgets/primary_btn.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:paws_envy/widgets/pet_card_large.dart';
+import 'package:paws_envy/widgets/pet_profile_card_large.dart';
 
-class PetScreen extends StatefulWidget {
-  const PetScreen({super.key});
+class PetsScreen extends StatefulWidget {
+  const PetsScreen({super.key});
 
   @override
-  State<PetScreen> createState() => _PetScreenState();
+  State<PetsScreen> createState() => _PetsScreenState();
 }
 
-class _PetScreenState extends State<PetScreen> {
+class _PetsScreenState extends State<PetsScreen> {
   final DBservice _db = DBservice();
   final AuthService _auth = AuthService();
 
@@ -34,12 +33,12 @@ class _PetScreenState extends State<PetScreen> {
   TextEditingController bioController = TextEditingController();
   TextEditingController activityController = TextEditingController();
   TextEditingController conditionController = TextEditingController();
-  String? gender;
+  String? petGender;
+  String? petCategory;
   String? isVaccinated;
   String? energyLevel;
-  File? _selectedImage;
 
-  Future<void> onPetSubmit() async {
+  Future<void> _handlePetSubmit() async {
     final String name = nameController.value.text;
     final String age = ageController.value.text;
     final String breed = breedController.value.text;
@@ -47,15 +46,21 @@ class _PetScreenState extends State<PetScreen> {
     final String activity = activityController.value.text;
     final String condition = conditionController.value.text;
 
-    if (name.isEmpty ||
-        activity.isEmpty ||
-        condition.isEmpty ||
-        energyLevel == null ||
-        age.isEmpty ||
-        breed.isEmpty ||
-        bio.isEmpty ||
-        gender == null ||
-        isVaccinated == null) {
+    final Map<String, dynamic> pet = {
+      'name': name,
+      'age': age,
+      'breed': breed,
+      'bio': bio,
+      'activity': activity,
+      'condition': condition,
+      'energyLevel': energyLevel,
+      'petGender': petGender,
+      'isVaccinated': isVaccinated,
+    };
+
+    // Check if any value is null or an empty string
+    if (pet.values
+        .any((value) => value == null || value.toString().trim().isEmpty)) {
       return;
     }
 
@@ -63,30 +68,17 @@ class _PetScreenState extends State<PetScreen> {
     print("Age: $age");
     print("Breed: $breed");
     print("Bio: $bio");
-    print("Gender: $gender");
+    print("Gender: $petGender");
     print("Vaccinated: $isVaccinated");
 
-    await _db
-        .addPetToFirestore(name, age, breed, bio, gender!, isVaccinated!,
-            activity, condition, energyLevel!)
-        .then((e) {
+    await _db.addPetToFirestore(pet).then((e) {
       _fetchPets();
 
       Navigator.pop(context);
     });
   }
 
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _selectedImage = File(pickedFile.path);
-      });
-    }
-  }
-
-  Future<dynamic> _showPetModal() {
+  Future<dynamic> _showAddPetModal() {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -96,40 +88,46 @@ class _PetScreenState extends State<PetScreen> {
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 20,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
-          ),
+              // left: 16,
+              // right: 16,
+              // top: 20,
+              // bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+              ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Add Pet Profile",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                "Add Pet Profile",
+                style: TextStyles.mediumHeading,
+              ),
               SizedBox(height: 15),
 
-              // Image Picker
-              Center(
-                child: Column(
-                  children: [
-                    _selectedImage != null
-                        ? Image.file(_selectedImage!,
-                            height: 120, width: 120, fit: BoxFit.cover)
-                        : Icon(Icons.image, size: 120, color: Colors.grey),
-                    TextButton(
-                      onPressed: _pickImage,
-                      child: Text("Choose Image"),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-
               // Pet Name Field
-              TextField(
-                  controller: nameController,
-                  decoration: InputDecoration(labelText: "Pet Name")),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(labelText: "Pet Name"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      value: petCategory,
+                      decoration: InputDecoration(labelText: "Category"),
+                      items: ["Cat", "Dog"].map((category) {
+                        return DropdownMenuItem(
+                          value: category,
+                          child: Text(category),
+                        );
+                      }).toList(),
+                      onChanged: (value) => setState(() => petCategory = value),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 10),
 
               // Bio Field (2 Lines)
@@ -151,9 +149,11 @@ class _PetScreenState extends State<PetScreen> {
                   ),
                   SizedBox(width: 10),
                   Expanded(
-                      child: TextField(
-                          controller: breedController,
-                          decoration: InputDecoration(labelText: "Breed"))),
+                    child: TextField(
+                      controller: breedController,
+                      decoration: InputDecoration(labelText: "Breed"),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -175,13 +175,13 @@ class _PetScreenState extends State<PetScreen> {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: gender,
+                      value: petGender,
                       decoration: InputDecoration(labelText: "Gender"),
                       items: ["Male", "Female"].map((gender) {
                         return DropdownMenuItem(
                             value: gender, child: Text(gender));
                       }).toList(),
-                      onChanged: (value) => setState(() => gender = value),
+                      onChanged: (value) => setState(() => petGender = value),
                     ),
                   ),
                   SizedBox(width: 10),
@@ -213,7 +213,7 @@ class _PetScreenState extends State<PetScreen> {
               SizedBox(height: 20),
 
               // Save Button
-              ElevatedButton(onPressed: onPetSubmit, child: Text("Save")),
+              PrimaryBtn(onPressed: _handlePetSubmit, text: 'Submit')
             ],
           ),
         );
@@ -226,6 +226,12 @@ class _PetScreenState extends State<PetScreen> {
 
     setState(() {
       _petProfiles = pets;
+    });
+  }
+
+  void handlePetDelete(petID) {
+    _db.removePetFromFirestore(petID).then((e) {
+      setState(() {});
     });
   }
 
@@ -249,7 +255,7 @@ class _PetScreenState extends State<PetScreen> {
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return _newPetCard(context);
+                return _addNewPetCard(context);
               }
 
               _petProfiles = snapshot.data!;
@@ -261,11 +267,12 @@ class _PetScreenState extends State<PetScreen> {
                     _petProfiles.length + 1, // +1 to add the "Add Pet" card
                 itemBuilder: (context, index) {
                   if (index == _petProfiles.length) {
-                    return _newPetCard(context);
+                    return _addNewPetCard(context);
                   }
 
                   final profile = _petProfiles[index];
-                  return PetCardLarge(
+                  return PetProfileCardLarge(
+                    handlePetDelete: handlePetDelete,
                     petProfile: profile,
                     currentUser: currentUser,
                   );
@@ -293,39 +300,39 @@ class _PetScreenState extends State<PetScreen> {
     );
   }
 
-  Container _newPetCard(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: AppColors.secondary),
-        boxShadow: [ShadowStyles.mediumShadow],
-        borderRadius: BorderRadius.circular(28),
-      ),
-      margin: EdgeInsets.all(16),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OutlinedButton(
-              onPressed: _showPetModal,
-              child: Row(
+  InkWell _addNewPetCard(BuildContext context) {
+    return InkWell(
+      onTap: _showAddPetModal,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          border: Border.all(color: AppColors.secondary),
+          boxShadow: [ShadowStyles.mediumShadow],
+          borderRadius: BorderRadius.circular(28),
+        ),
+        margin: EdgeInsets.all(16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Add Pet',
-                    style: TextStyles.btnText,
-                  ),
-                  SizedBox(width: 6),
                   Icon(
                     Icons.add,
                     size: 22,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
+                  SizedBox(height: 6),
+                  Text(
+                    'Add Pet',
+                    style: TextStyles.btnText,
+                  ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

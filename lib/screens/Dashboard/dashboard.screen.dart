@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:paws_envy/screens/Dashboard/dashboard_activities.dart';
+import 'package:paws_envy/screens/Dashboard/dashboard_recent_services.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard_pets.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard_services.dart';
 import 'package:paws_envy/widgets/search_bar.dart';
@@ -24,10 +24,10 @@ class _DashboardState extends State<Dashboard> {
             child: SearchBarField(),
           ),
           DashboardPetsSection(),
-          SizedBox(height: 30),
-          DashboardServicesSection(),
-          SizedBox(height: 25),
-          DashboardActivitiesSection(),
+          SizedBox(height: 20),
+          // DashboardServicesSection(),
+          // SizedBox(height: 20),
+          RecentServicesSection(),
         ],
       ),
     );

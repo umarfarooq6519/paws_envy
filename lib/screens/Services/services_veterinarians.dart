@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:paws_envy/models/petcare.model.dart';
 import 'package:paws_envy/utils/text.styles.dart';
+import 'package:paws_envy/widgets/card_medium.dart';
 
-class ServicesNearbyCareSection extends StatelessWidget {
-  const ServicesNearbyCareSection({super.key});
+class ServicesVeterinarians extends StatelessWidget {
+  const ServicesVeterinarians({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class ServicesNearbyCareSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Pet Care Nearby',
+                'Veterinarians',
                 style: TextStyles.mediumHeading,
               ),
               TextButton(

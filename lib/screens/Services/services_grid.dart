@@ -9,7 +9,7 @@ class ServicesGridSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 180,
       child: GridView.count(
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 12),
@@ -18,21 +18,23 @@ class ServicesGridSection extends StatelessWidget {
         mainAxisSpacing: 10,
         childAspectRatio: 1.1,
         children: [
-          _serviceCard(
-            'Pet Sitting',
-            'assets/icons/undraw_friends_xscy.svg',
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/pet_sitters');
+            },
+            child: _serviceCard(
+              'Pet Sitting',
+              'assets/icons/undraw_friends_xscy.svg',
+            ),
           ),
-          _serviceCard(
-            'Pet Walking',
-            'assets/icons/undraw_dog-walking_w27q.svg',
-          ),
-          _serviceCard(
-            'Veterinarians',
-            'assets/icons/undraw_doctors_djoj.svg',
-          ),
-          _serviceCard(
-            'Pet Food',
-            'assets/icons/undraw_breakfast_rgx5.svg',
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/pet_walkers');
+            },
+            child: _serviceCard(
+              'Pet Walking',
+              'assets/icons/undraw_dog-walking_w27q.svg',
+            ),
           ),
         ],
       ),

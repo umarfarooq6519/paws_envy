@@ -8,7 +8,7 @@ import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/screens/Camera/camera.screen.dart';
 import 'package:paws_envy/screens/Community/community.screen.dart';
 import 'package:paws_envy/screens/Dashboard/dashboard.screen.dart';
-import 'package:paws_envy/screens/Pets/pet.screen.dart';
+import 'package:paws_envy/screens/Pets/pets.screen.dart';
 import 'package:paws_envy/screens/Services/services.screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     CommunityScreen(),
     CameraScreen(),
     ServicesScreen(),
-    PetScreen(),
+    PetsScreen(),
   ];
 
   void _onPageChanged(int index) {
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
 
       // ### Bottom Nav
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
+        padding: const EdgeInsets.fromLTRB(12, 6, 12, 18),
         decoration: BoxDecoration(
           color: AppColors.secondaryAccent,
         ),

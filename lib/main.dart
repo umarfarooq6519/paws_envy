@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // widget tree is the primary location of the app
-      home: const WidgetTree(),
+      home: WidgetTree(),
       routes: AppRoutes.routes,
     );
   }

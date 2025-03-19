@@ -35,7 +35,7 @@ class DashboardPetsSection extends StatelessWidget {
 
         // ~ content
         SizedBox(
-          height: 160,
+          height: 220,
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: _db.fetchUserPets(),
             builder: (context, snapshot) {
@@ -59,28 +59,38 @@ class DashboardPetsSection extends StatelessWidget {
 
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 12),
-                    width: 200,
+                    width: 180,
                     decoration: _cardDecoration(),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            petProfile['petGender'] == 'Male'
+                                ? 'assets/images/cartoon_dog.jpg'
+                                : 'assets/images/cartoon_cat.jpg',
+                            fit: BoxFit.contain,
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
                         const SizedBox(height: 5),
                         Chip(
                           backgroundColor: AppColors.primaryAccent,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
+                            horizontal: 10,
+                            vertical: 4,
                           ),
                           label: Text(petProfile['name']),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
-                            side: const BorderSide(
-                                color: AppColors.black, width: 1),
+                            side: BorderSide(color: AppColors.border, width: 1),
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 4),
                         Text(
-                            '${petProfile['age']} yrs - ${petProfile['gender']}')
+                            '${petProfile['breed']} - ${petProfile['petGender']}')
                       ],
                     ),
                   );

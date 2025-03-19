@@ -1,25 +1,29 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:paws_envy/services/db.service.dart';
-
 import 'package:paws_envy/utils/colors.styles.dart';
 import 'package:paws_envy/utils/shadow.styles.dart';
 import 'package:paws_envy/utils/text.styles.dart';
 import 'package:paws_envy/widgets/pet_owner_card_medium.dart';
 
-class PetCardLarge extends StatefulWidget {
-  const PetCardLarge(
-      {super.key, required this.petProfile, required this.currentUser});
+class PetProfileCardLarge extends StatefulWidget {
+  const PetProfileCardLarge({
+    super.key,
+    required this.petProfile,
+    required this.currentUser,
+    required this.handlePetDelete,
+  });
 
   final Map<String, dynamic> petProfile;
   final User? currentUser;
+  final Function(String) handlePetDelete;
 
   @override
-  State<PetCardLarge> createState() => _PetCardLargeState();
+  State<PetProfileCardLarge> createState() => _PetProfileCardLargeState();
 }
 
-class _PetCardLargeState extends State<PetCardLarge> {
+class _PetProfileCardLargeState extends State<PetProfileCardLarge> {
   String? selectedValue;
 
   final DBservice _db = DBservice();
@@ -28,55 +32,84 @@ class _PetCardLargeState extends State<PetCardLarge> {
     final profile = widget.petProfile;
 
     showModalBottomSheet(
+      showDragHandle: true,
       context: context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
-        return Wrap(
-          children: [
-            ListTile(
+        return SafeArea(
+          bottom: true,
+          child: Wrap(
+            children: [
+              ListTile(
                 leading: Icon(Icons.pets),
                 title: Text('Mark as Lost'),
                 onTap: () {
                   _db.markPetAsLost(profile);
                   Navigator.pop(context);
-                }),
-            ListTile(
-              leading: Icon(Icons.search),
-              title: Text('Mark as Found'),
-              onTap: () {
-                _db.removePetFromLostFound(profile['petID']);
-                Navigator.pop(context);
-                // Handle action
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.volunteer_activism),
-              title: Text('Mark for adoption'),
-              onTap: () {
-                _db.markPetForAdoption(profile);
-                Navigator.pop(context);
-                // Handle action
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.cancel),
-              title: Text('Remove from adoption'),
-              onTap: () {
-                _db.removePetFromAdoption(profile['petID']);
-                Navigator.pop(context);
-              },
-            ),
-            // ListTile(
-            //   leading: Icon(Icons.cancel),
-            //   title: Text('Cancel'),
-            //   onTap: () => Navigator.pop(context),
-            // ),
-          ],
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Mark as Found'),
+                onTap: () {
+                  _db.removePetFromLostFound(profile['petID']);
+                  Navigator.pop(context);
+                  // Handle action
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.volunteer_activism),
+                title: Text('Mark for adoption'),
+                onTap: () {
+                  _db.markPetForAdoption(profile);
+                  Navigator.pop(context);
+                  // Handle action
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Remove from adoption'),
+                onTap: () {
+                  _db.removePetFromAdoption(profile['petID']);
+                  Navigator.pop(context);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(
+                  Icons.cancel,
+                  color: AppColors.error,
+                ),
+                title: Text(
+                  'Delete pet',
+                  style: TextStyles.smallHeading.copyWith(
+                    color: AppColors.error,
+                  ),
+                ),
+                onTap: () {
+                  widget.handlePetDelete(profile['petID']);
+                  Navigator.pop(context);
+                },
+              ),
+              // SizedBox(height: 10),
+            ],
+          ),
         );
       },
     );
+  }
+
+  Map<String, dynamic> petProfile = {};
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      petProfile = widget.petProfile;
+    });
   }
 
   @override
@@ -96,17 +129,37 @@ class _PetCardLargeState extends State<PetCardLarge> {
         padding: EdgeInsets.all(14),
         child: Column(
           children: [
-            // SizedBox(
-            //   width: double.infinity,
-            //   height: 300,
-            //   child: ClipRRect(
-            //     borderRadius: BorderRadius.circular(20),
-            //     child: Image.asset(
-            //       petProfile['imgURL'],
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
+            SizedBox(
+              width: double.infinity,
+              height: 300,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      petProfile['petGender'] == 'Male'
+                          ? 'assets/images/cartoon_dog.jpg'
+                          : 'assets/images/cartoon_cat.jpg',
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      height: 300,
+                    ),
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 0,
+                    child: InkWell(
+                      onTap: () => showLostFoundModal(context),
+                      child: Icon(
+                        Icons.more_vert,
+                        color: Colors.black,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             SizedBox(height: 15),
 
@@ -119,27 +172,20 @@ class _PetCardLargeState extends State<PetCardLarge> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.petProfile['name'],
+                        petProfile['name'],
                         style: TextStyles.mediumHeading,
                       ),
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () => showLostFoundModal(context),
-                            child: Icon(Icons.menu),
-                          ),
-                          SizedBox(width: 10),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(widget.petProfile['gender'] == "Male"
-                                ? Icons.male
-                                : Icons.female),
-                          ),
-                        ],
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(
+                          petProfile['gender'] == "Male"
+                              ? Icons.male
+                              : Icons.female,
+                        ),
                       ),
                     ],
                   ),
@@ -151,7 +197,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                     enabled: false,
                     style: TextStyles.baseText,
                     controller: TextEditingController(
-                      text: widget.petProfile['bio'],
+                      text: petProfile['bio'],
                     ),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -178,7 +224,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                       style: TextStyles.smallHeading,
                     ),
                     Text(
-                      widget.petProfile['age'],
+                      petProfile['age'],
                       style: TextStyles.dimText,
                     ),
                   ],
@@ -202,7 +248,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                       style: TextStyles.smallHeading,
                     ),
                     Text(
-                      widget.petProfile['breed'],
+                      petProfile['breed'],
                       style: TextStyles.dimText,
                     ),
                   ],
@@ -225,7 +271,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                         'Favorite Activity',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(widget.petProfile['activity']),
+                      Text(petProfile['activity']),
                     ],
                   ),
                 ],
@@ -245,7 +291,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                         'Energy Level',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(widget.petProfile['energyLevel']),
+                      Text(petProfile['energyLevel']),
                     ],
                   ),
                 ],
@@ -265,7 +311,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                         'Health Conditions',
                         style: TextStyles.smallHeading,
                       ),
-                      Text(widget.petProfile['condition']),
+                      Text(petProfile['condition']),
                     ],
                   ),
                 ],
@@ -285,7 +331,7 @@ class _PetCardLargeState extends State<PetCardLarge> {
                         'Vaccinated',
                         style: TextStyles.smallHeading,
                       ),
-                      Text('${widget.petProfile['isVaccinated']}'),
+                      Text('${petProfile['isVaccinated']}'),
                     ],
                   ),
                 ],
@@ -296,9 +342,9 @@ class _PetCardLargeState extends State<PetCardLarge> {
 
             // Pet Owner Card
             PetOwnerCardMedium(
-              ownerName: widget.petProfile['userName'],
-              ownerEmail: widget.petProfile['userEmail'],
-              ownerAvatar: widget.petProfile['userAvatar'],
+              ownerName: petProfile['userName'],
+              ownerEmail: petProfile['userEmail'],
+              ownerAvatar: petProfile['userAvatar'],
             ),
           ],
         ),
