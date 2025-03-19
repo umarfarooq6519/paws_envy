@@ -10,6 +10,7 @@
 .svn/
 migrate_working_dir/
 .env
+android/app/.cxx/
 
 # IntelliJ related
 *.iml
